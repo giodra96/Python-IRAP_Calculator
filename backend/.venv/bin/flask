@@ -1,4 +1,4 @@
-#!/home/it059977/Progetti/MasterAI/backend/.venv/bin/python
+#!/Users/Giodra/MasterAI/backend/.venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

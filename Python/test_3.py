@@ -101,3 +101,22 @@ def emissione_modellof24(lista_comuni, lista_imprese):
         if stop == True: break
     if stop == False: print("L'impresa non è registrata a sistema")
 
+def emissione_modellof24_ritroso():
+    stop = False
+    nome = input("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente")
+
+    codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? "), "codice_fiscale", "Codice fiscale non valido")
+    sede_legale = input("Quale è la sede legale dell'impresa? ")
+    denominazione = input("Quale è il nome dell'impresa? ")
+    ragione_sociale = input("Quale è la ragione sociale dell'impresa? ")
+    divisione_ateco = input("Quale è la divisione ateco dell'impresa? ")
+    numero_dipendenti = valida_dato(input("Quale è il numero di dipendenti dell'impresa? "), "intero", "Numero di dipendenti non valido")
+    numero_soci = valida_dato(input("Quale è il numero di soci dell'impresa? "), "intero", "Numero di soci non valido")
+    numero_amministratori = valida_dato(input("Quale è il numero di amministratori dell'impresa? "), "intero", "Numero di amministratori non valido")
+    data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? "), "data", "Data di costituzione non valida")
+    certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? "), "booleano", "Certificazioni di qualità non valide")
+    fatturato = valida_dato(input("Quale è il fatturato dell'impresa? "), "intero", "Fatturato non valido")
+    impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
+    comune.registra_impresa(impresa)
+    lista_imprese.append(impresa)
+               
