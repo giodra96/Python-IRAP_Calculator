@@ -2,10 +2,10 @@ import os #permette di verificare l'esistenza del file imprese.txt
 from impresa import Impresa
 import pandas as pd
 
-def lista_impreseordinate():
+def lista_impreseordinate(file_path):
     lista_impreseordinate = []
     try: # Verifica l'esistenza del file imprese.txt
-        with open("imprese_ordinate.txt", "r") as file: # Apertura del file imprese.txt per lettura
+        with open(file_path, "r") as file: # Apertura del file imprese.txt per lettura
             for riga in file:
                 dati_impresa = riga.split(",")
                 impresa = Impresa(
@@ -62,7 +62,6 @@ def pandas(lista_imprese):
     return aziende_filtrate["Denominazione"].to_string(index=False)
 
 def conta_aziende_per_ateco(lista_imprese):
- 
     divisioni_ateco = {}
 
     for impresa in lista_imprese:
@@ -74,20 +73,19 @@ def conta_aziende_per_ateco(lista_imprese):
         print(f"{divisione_ateco}: {numero_aziende}")
 
 def main():  # Funzione principale
-
-
-    print(media_aritmetica(lista_impreseordinate(), 'numero_dipendenti'))
-    print(media_aritmetica(lista_impreseordinate(), 'numero_soci'))
+    lista_imprese = lista_impreseordinate("imprese_ordinate.txt")
+    print(media_aritmetica(lista_imprese, 'numero_dipendenti'))
+    print(media_aritmetica(lista_imprese, 'numero_soci'))
 
     print("\n")
-    print(quality_company(lista_impreseordinate()))
+    print(quality_company(lista_imprese))
     print("\n")
 
-    print(pandas(lista_impreseordinate()))
+    print(pandas(lista_imprese))
     print("\n")
 
     print("A seguire il numero di aziende per ogni divisione ATECO: \n")
-    conta_aziende_per_ateco(lista_impreseordinate())
+    conta_aziende_per_ateco(lista_imprese)
     print("\n")
 
 if __name__ == "__main__":
