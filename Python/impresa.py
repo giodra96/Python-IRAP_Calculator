@@ -12,7 +12,7 @@ class Impresa:
         self.certificazioni_qualita = certificazioni_qualita
         self.fatturato = fatturato
 
-    def dirittoAgevolazione(self):
+    def diritto_agevolazione(self):
 
         # Verifica se la divisione ATECO è "A03" e se il numero di dipendenti è maggiore di 15
         if self.divisione_ateco == "A03" and self.numero_dipendenti > 15:
@@ -41,7 +41,7 @@ class Impresa:
 
         # Riduzione IRAP
         riduzione_irap = 0
-        if Impresa.dirittoAgevolazione(self) == True:
+        if Impresa.diritto_agevolazione(self) == True:
             riduzione_irap = irap_lorda * 1.5 / 100
 
         # Calcolo l'IRAP netta

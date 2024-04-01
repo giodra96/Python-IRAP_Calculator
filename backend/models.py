@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -17,8 +18,10 @@ class Comune(db.Model):
     
     def serialize(self):
         return {
-            'id': self.id,
-            'nome': self.nome,
+            'id': self.id ,
+            'nome': self.nome ,
+            'imprese_registrate' : [imp.serialize() for imp in self.imprese_registrate] ,
+            'modelli_f24_emessi' : [mf.serialize() for mf in self.modelli_f24_emessi]
         }
 
     def registra_impresa(self, impresa):
@@ -48,9 +51,9 @@ class Impresa(db.Model):
     data_costituzione = db.Column(db.Date, nullable=False)
     certificazioni_qualita = db.Column(db.Boolean, default=False)
     fatturato = db.Column(db.Float, nullable=False)
-    comune_id = db.Column(db.Integer, db.ForeignKey('comune.id'), nullable=False)
+    comune_id = db.Column(db.Integer, db.ForeignKey('comune.id'), nullable=True)
   
-    def __init__(self, codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato, comune):
+    def __init__(self, codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato):
         self.codice_fiscale = codice_fiscale
         self.denominazione = denominazione
         self.ragione_sociale = ragione_sociale
@@ -59,10 +62,9 @@ class Impresa(db.Model):
         self.numero_dipendenti = numero_dipendenti
         self.numero_soci = numero_soci
         self.numero_amministratori = numero_amministratori
-        self.data_costituzione = data_costituzione
+        self.data_costituzione = datetime.strptime(data_costituzione, "%Y-%m-%d")
         self.certificazioni_qualita = certificazioni_qualita
         self.fatturato = fatturato
-        self.comune_id = comune.id
 
     def serialize(self):
         return {
@@ -81,7 +83,7 @@ class Impresa(db.Model):
             'comune_id': self.comune_id
         }
         
-    def dirittoAgevolazione(self):
+    def diritto_agevolazione(self):
         # Verifica se la divisione ATECO è "A03" e se il numero di dipendenti è maggiore di 15
         if self.divisione_ateco == "A03" and self.numero_dipendenti > 15:
             return True
@@ -108,7 +110,7 @@ class Impresa(db.Model):
 
         # Riduzione IRAP
         riduzione_irap = 0
-        if self.dirittoAgevolazione():
+        if self.diritto_agevolazione():
             riduzione_irap = irap_lorda * 1.5 / 100
 
         # Calcolo l'IRAP netta
@@ -119,17 +121,24 @@ class Impresa(db.Model):
 class ModelloF24(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     impresa_id = db.Column(db.Integer, db.ForeignKey('impresa.id'), nullable=False)
+    impresa = db.relationship('Impresa', backref=db.backref('modelli_f24', lazy=True))
     comune_id = db.Column(db.Integer, db.ForeignKey('comune.id'), nullable=False)
     data = db.Column(db.Date, nullable=False)
     importo_irap = db.Column(db.Float, nullable=False)
 
     def __init__(self, impresa, data):
-        if not isinstance(impresa, Impresa):
-            raise ValueError("L'impresa deve essere un oggetto di tipo Impresa")
-        self.impresa_id = impresa.id
-        self.comune_id = comune.id
-        self.data = data
+        self.data = datetime.strptime(data, "%Y-%m-%d")
+        self.impresa = impresa
         self.importo_irap = impresa.calcola_irap()
+
+    def serialize(self):
+        return {
+            "id" : self.id ,
+            "impresa_id" : self.impresa.id , 
+            "comune_id" : self.comune_id ,
+            "data": self.data.strftime('%Y-%m-%d') ,
+            "importo_irap" : self.importo_irap
+        }
 
     def prepara_f24(self):
         return {

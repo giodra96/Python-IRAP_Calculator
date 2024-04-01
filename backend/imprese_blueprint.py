@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, jsonify, request
 from models import db, Impresa, Comune, ModelloF24  # Assicurati di importare i modelli necessari
 
@@ -18,6 +19,10 @@ def get_impresa(id):
 def create_impresa():
     data = request.json
     impresa = Impresa(**data)
+    comune_id = data.get('comune_id')
+    if (comune_id != None):
+        comune = Comune.query.get_or_404(comune_id)
+        comune.imprese_registrate.append(impresa)
     db.session.add(impresa)
     db.session.commit()
     return jsonify(impresa.serialize()), 201
@@ -26,7 +31,13 @@ def create_impresa():
 def update_impresa(id):
     impresa = Impresa.query.get_or_404(id)
     data = request.json
+    comune_id = data.pop('comune_id')
+    if (comune_id != None):
+        comune = Comune.query.get_or_404(comune_id)
+        comune.imprese_registrate.append(impresa)
     for key, value in data.items():
+        if (key == "data_costituzione"):
+            value = datetime.strptime(value, "%Y-%m-%d")
         setattr(impresa, key, value)
     db.session.commit()
     return jsonify(impresa.serialize())
@@ -37,18 +48,3 @@ def delete_impresa(id):
     db.session.delete(impresa)
     db.session.commit()
     return '', 204
-
-# Gestione dei ModelliF24 emessi per una determinata Impresa
-@imprese_blueprint.route('/<int:id>/modellif24', methods=['GET'])
-def get_modelli_f24_of_impresa(id):
-    impresa = Impresa.query.get_or_404(id)
-    return jsonify([mf.serialize() for mf in impresa.modelli_f24])
-
-@imprese_blueprint.route('/<int:id>/modellif24', methods=['POST'])
-def create_modellif24_for_impresa(id):
-    impresa = Impresa.query.get_or_404(id)
-    data = request.json
-    modello_f24 = ModelloF24(impresa=impresa, **data)
-    db.session.add(modello_f24)
-    db.session.commit()
-    return jsonify(modello_f24.serialize()), 201

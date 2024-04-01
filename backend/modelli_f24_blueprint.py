@@ -39,3 +39,8 @@ def delete_modellif24(id):
     db.session.delete(modellif24)
     db.session.commit()
     return '', 204
+
+@modelli_f24_blueprint.route('/<int:id>/prepara', methods=['GET'])
+def prepara_modellif42(id):
+    modellif24 = ModelloF24.query.get_or_404(id)
+    return modellif24.prepara_f24()
