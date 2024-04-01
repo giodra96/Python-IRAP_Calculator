@@ -20,8 +20,8 @@ class Comune(db.Model):
         return {
             'id': self.id ,
             'nome': self.nome ,
-            'imprese_registrate' : [imp.serialize() for imp in self.imprese_registrate] ,
-            'modelli_f24_emessi' : [mf.serialize() for mf in self.modelli_f24_emessi]
+            'imprese_registrate' : [imp.id for imp in self.imprese_registrate] ,
+            'modelli_f24_emessi' : [mf.id for mf in self.modelli_f24_emessi]
         }
 
     def registra_impresa(self, impresa):

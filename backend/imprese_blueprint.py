@@ -17,30 +17,43 @@ def get_impresa(id):
 
 @imprese_blueprint.route('/', methods=['POST'])
 def create_impresa():
-    data = request.json
-    impresa = Impresa(**data)
-    comune_id = data.get('comune_id')
-    if (comune_id != None):
-        comune = Comune.query.get_or_404(comune_id)
-        comune.imprese_registrate.append(impresa)
-    db.session.add(impresa)
-    db.session.commit()
-    return jsonify(impresa.serialize()), 201
+    try :
+        data = request.json
+        comune_id = None
+        if ('comune_id' in data.keys()):
+            comune_id = data.pop('comune_id')
+        impresa = Impresa(**data)
+        if (comune_id != None):
+            comune = Comune.query.get_or_404(comune_id)
+            comune.imprese_registrate.append(impresa)
+        db.session.add(impresa)
+        db.session.commit()
+        return jsonify(impresa.serialize()), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error" : str(e)}) , 500
 
 @imprese_blueprint.route('/<int:id>', methods=['PUT'])
 def update_impresa(id):
-    impresa = Impresa.query.get_or_404(id)
-    data = request.json
-    comune_id = data.pop('comune_id')
-    if (comune_id != None):
-        comune = Comune.query.get_or_404(comune_id)
-        comune.imprese_registrate.append(impresa)
-    for key, value in data.items():
-        if (key == "data_costituzione"):
-            value = datetime.strptime(value, "%Y-%m-%d")
-        setattr(impresa, key, value)
-    db.session.commit()
-    return jsonify(impresa.serialize())
+    try:
+        impresa = Impresa.query.get_or_404(id)
+        data = request.json
+        comune_id = data.pop('comune_id')
+        if (impresa.comune_id != None):
+            comune = Comune.query.get_or_404(impresa.comune_id)
+            comune.imprese_registrate.remove(impresa)
+        if (comune_id != None):
+            comune = Comune.query.get_or_404(comune_id)
+            comune.imprese_registrate.append(impresa)
+        for key, value in data.items():
+            if (key == "data_costituzione"):
+                value = datetime.strptime(value, "%Y-%m-%d")
+            setattr(impresa, key, value)
+        db.session.commit()
+        return jsonify(impresa.serialize())
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error" : str(e)}) , 500
 
 @imprese_blueprint.route('/<int:id>', methods=['DELETE'])
 def delete_impresa(id):
