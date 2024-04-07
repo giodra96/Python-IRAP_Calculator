@@ -101,9 +101,8 @@ def emissione_modellof24(lista_comuni, lista_imprese):
         if stop == True: break
     if stop == False: print("L'impresa non è registrata a sistema")
 
-def emissione_modellof24_ritroso():
-    stop = False
-    nome = input("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente")
+def emissione_modellof24_ritroso(lista_comuni):
+    print("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente. \n\n")
 
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? "), "codice_fiscale", "Codice fiscale non valido")
     sede_legale = input("Quale è la sede legale dell'impresa? ")
@@ -117,6 +116,34 @@ def emissione_modellof24_ritroso():
     certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? "), "booleano", "Certificazioni di qualità non valide")
     fatturato = valida_dato(input("Quale è il fatturato dell'impresa? "), "intero", "Fatturato non valido")
     impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
-    comune.registra_impresa(impresa)
-    lista_imprese.append(impresa)
-               
+    for comune in lista_comuni:
+        if comune.nome == impresa.sede_legale:
+            data = valida_dato(input("In che data del passato vuoi emettere il modello? "), "data", "Data non valida")
+            comune.emetti_modello_f24(impresa, data)
+            print("Modello F24 emesso")
+            break
+        print("Non esiste il comune corrispodente alla sede legale esplicitata per l'impresa a sistema ")
+
+def stampa_modelliF24(nome_comune, lista_comuni):
+    for comune in lista_comuni:
+        if comune.nome == nome_comune:
+            print(f"Ecco la lista dei ModelliF24 emessi dal comune di {comune.nome}")
+            for modello in comune.modelli_f24_emessi:
+                print(modello.prepara_f24())
+        break
+
+def genera_report(nome_comune, lista_comuni, inizio, fine):
+    print(f"Report sull'IRAP riscosso dal comune di {nome_comune} dal {inizio} al {fine} \n\n")
+    somma = 0
+    conta = 0
+    for comune in lista_comuni:
+        if comune.nome == nome_comune:
+            for modello in comune.modelli_f24_emessi:
+                if modello.data <= fine and modello.data >= inizio:
+                    somma += modello.importo_irap
+                    conta += 1
+        break
+
+    print(f"Numero di aziende paganti nel periodo: {conta} \n")
+    print(f"Totale IRAP pagato nel periodo: {somma} \n")
+    print(f"Quota IRAP media per azienda nel periodo: {somma/conta} \n")
