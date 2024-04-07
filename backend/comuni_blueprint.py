@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models import db, Comune, Impresa, ModelloF24  # Assicurati di importare i modelli necessari
+from models import db, Comune
 
 comuni_blueprint = Blueprint('comuni_blueprint', __name__, url_prefix='/api/comuni')
 

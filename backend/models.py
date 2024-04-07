@@ -25,14 +25,10 @@ class Comune(db.Model):
         }
 
     def registra_impresa(self, impresa):
-        if not isinstance(impresa, Impresa):
-            raise ValueError("L'impresa deve essere un oggetto di tipo Impresa")
         self.imprese_registrate.append(impresa)
         db.session.commit()
 
     def emetti_modello_f24(self, impresa, data):
-        if not isinstance(impresa, Impresa):
-            raise ValueError("L'impresa deve essere un oggetto di tipo Impresa")
         modello_f24 = ModelloF24(impresa=impresa, data=data)
         db.session.add(modello_f24)
         self.modelli_f24_emessi.append(modello_f24)

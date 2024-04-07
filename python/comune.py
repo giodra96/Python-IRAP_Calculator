@@ -13,5 +13,3 @@ class Comune:
     def emetti_modello_f24(self, impresa, data):
         modello_f24 = ModelloF24(impresa, data)
         self.modelli_f24_emessi.append(modello_f24)
-
- 

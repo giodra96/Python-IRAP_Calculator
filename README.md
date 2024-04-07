@@ -16,6 +16,15 @@ Attiva il virtual enviroment:
     ```
     $ .venv\Scripts\activate
     ```
+    Se non è presente il comando ```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser```, esegui questo comando:
+    ```
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    ```
+    Esegui il comando:
+
+    ```
+    $ .venv\Scripts\activate
+    ```
 Installa le dipendenze
 ```
 $ pip3 install -r requirements.txt

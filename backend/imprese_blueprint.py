@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, jsonify, request
-from models import db, Impresa, Comune, ModelloF24  # Assicurati di importare i modelli necessari
+from models import db, Impresa, Comune
 
 imprese_blueprint = Blueprint('imprese_blueprint', __name__, url_prefix='/api/imprese')
 
