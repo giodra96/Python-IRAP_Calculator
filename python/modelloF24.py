@@ -1,10 +1,12 @@
-from impresa import Impresa
+#Definizione di una classe ModelloF24 
 
 class ModelloF24:
     def __init__(self, impresa, data):
         self.impresa = impresa 
         self.data = data
-        self.importo_irap = impresa.calcola_irap()
+        self.importo_irap = impresa.calcola_irap() #Calcola il valore dell'importo irap per l'impresa passata come parametro
+
+    #Metodo che restituisce un dizionario con i dati del modello F24 generato
 
     def prepara_f24(self):
         return {
