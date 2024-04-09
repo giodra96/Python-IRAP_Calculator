@@ -29,12 +29,14 @@ def leggi_listaimprese(file_path):
         print(fe)
     return lista_imprese
 
+#Metodo che crea un dizionario che associa ad ogni codice fiscale il numero di persone coinvolte nell'impresa
+
 def dizionario(lista_imprese):
-    # Creazione del dizionario
-    n_dipendenti = {} # Creazione del dizionario
+    #Creazione del dizionario
+    n_dipendenti = {} #Creazione del dizionario
     for impresa in lista_imprese:
-        if impresa.codice_fiscale not in n_dipendenti: # Se il codice fiscale non è presente nel dizionario, aggiungo un elemento
-            n_dipendenti[impresa.codice_fiscale] = 0 # Aggiunta di un elemento al dizionario
+        if impresa.codice_fiscale not in n_dipendenti: #Se il codice fiscale non è presente nel dizionario, aggiungo un elemento
+            n_dipendenti[impresa.codice_fiscale] = 0 #Aggiunta di un elemento al dizionario
         n_dipendenti[impresa.codice_fiscale] += impresa.numero_dipendenti + impresa.numero_soci + impresa.numero_amministratori 
     return n_dipendenti
 
@@ -48,7 +50,7 @@ def ordina_imprese(lista_imprese):
 
 def stampa_imprese(lista_imprese):
     for impresa in lista_imprese:
-        print(f"Codice fiscale: {impresa.codice_fiscale}, Denominazione: {impresa.denominazione}, Ragione sociale: {impresa.ragione_sociale}, Sede legale: {impresa.sede_legale}, Divisione ATECO: {impresa.divisione_ateco}, Numero dipendenti: {impresa.numero_dipendenti}, Numero soci: {impresa.numero_soci}, Numero amministratori: {impresa.numero_amministratori}, Data costituzione: {impresa.data_costituzione}, Certificazioni qualità: {impresa.certificazioni_qualita}, Fatturato: {impresa.fatturato} \n\n")
+        print(f"Codice fiscale: {impresa.codice_fiscale}, Denominazione: {impresa.denominazione}, Ragione sociale: {impresa.ragione_sociale}, Sede legale: {impresa.sede_legale}, Divisione ATECO: {impresa.divisione_ateco}, Numero dipendenti: {impresa.numero_dipendenti}, Numero soci: {impresa.numero_soci}, Numero amministratori: {impresa.numero_amministratori}, Data costituzione: {impresa.data_costituzione}, Certificazioni qualità: {impresa.certificazioni_qualita}, Fatturato: {impresa.fatturato} \n")
 
 #Metodo che scrive su file.txt tutte le imprese presenti nella lista lista_imprese
 

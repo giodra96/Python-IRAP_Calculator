@@ -24,11 +24,10 @@ def quality_company(lista_imprese):
                 c += 1
             elif impresa.fatturato >= 10000 and impresa.fatturato <= 50000:
                 c += 1
-    try: #Verifica che la media aritmetica sia calcolabile
+    if c!=0: #Verifica che la media aritmetica sia calcolabile
         perc = (c / len(lista_imprese))*100
-    except ZeroDivisionError as e:
-        print(e)
-    return {f"La percentuale di aziende di qualità è: {perc}%"}
+        return {f"La percentuale di aziende di qualità è: {perc}%"}
+    else: return "Non è stata trovata alcuna azienda di qualità"
 
 #Metodo che restituisce le aziende di qualità e che sono affiliate alla societa per azioni
 

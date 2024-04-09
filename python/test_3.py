@@ -1,6 +1,7 @@
 from comune import Comune #Importo la classe Comune dal file comune.py
 from impresa import Impresa #Importo la classe Impresa dal file impresa.py
 from datetime import datetime, date #Importo datetime per la gestione e il controllo delle date
+import test_2 #Importo i metodi definiti nel test_2
 
 #Metodo per la validazione dei dati inseriti da input
 
@@ -163,7 +164,10 @@ def emissione_modellof24_ritroso(lista_comuni):
 
 #Metodo che stampa i ModelliF24 emessi per ogni comune
 
-def stampa_modelliF24(nome_comune, lista_comuni):
+def stampa_modelliF24(lista_comuni):
+    nome_comune = input("Di quale comune vuoi visualizzare i modelliF24? ")
+    if not nome[0].isupper(): 
+        nome = nome.capitalize()
     for comune in lista_comuni:
         if comune.nome == nome_comune:
             print(f"Ecco la lista dei ModelliF24 emessi dal comune di {comune.nome}")
@@ -173,17 +177,32 @@ def stampa_modelliF24(nome_comune, lista_comuni):
 
 #Metodo che restituisce un report con le statistiche sull'IRAP riscosso dal comune nel periodo
 
-def genera_report(nome_comune, lista_comuni, inizio, fine):
+def genera_report(lista_comuni):
+    nome_comune = input("Di quale comune vuoi visualizzare il report? ")
+    if not nome[0].isupper(): 
+        nome = nome.capitalize()
+    inizio = valida_dato(input("Inserisci una data di inizio periodo per l'emissione del report \n Inserire una data nel formato gg-mm-aaaa"), "data", "Data non valida")
+    fine = valida_dato(input("Inserisci una data di fine periodo per l'emissione del report \n Inserire una data nel formato gg-mm-aaaa"), "data", "Data non valida")
     print(f"Report sull'IRAP riscosso dal comune di {nome_comune} dal {inizio} al {fine} \n\n")
     somma = 0
     conta = 0
+    lista_imprese = []
     for comune in lista_comuni:
         if comune.nome == nome_comune:
             for modello in comune.modelli_f24_emessi:
-                if modello.data <= fine and modello.data >= inizio:
+                if modello.data <= fine and modello.data >= inizio: #Verifico che il modello sia stato rilasciato nel periodo indicato
+                    lista_imprese.append(modello.impresa)
                     somma += modello.importo_irap
                     conta += 1
         break
-    print(f"Numero di aziende paganti nel periodo: {conta} \n")
+    #Stampa delle statistiche
+    print(f"Dati sulle imprese paganti dal comune di {comune.nome}. \n")
+    print(f"Numero di imprese paganti: {conta} \n")
+    print(f"Media del numero di Soci: {test_2.media_aritmetica(lista_imprese, 'numero_soci')} \n")
+    print(f"Media del numero di Amministratori: {test_2.media_aritmetica(lista_imprese, 'numero_amministratori')} \n")
+    print(f"Percentuale di qualità delle imprese: {test_2.quality_company(lista_imprese)} \n")
+    print(f"Società per Azioni con certificati di qualità: {test_2.quality_stocks(lista_imprese)} \n")
+    print(f"Numero di imprese per Divisione ATECO: {test_2.conta_aziende_per_ateco(lista_imprese)} \n\n")
+    print(f"Dati sull'IRAP riscosso dal comune di {nome_comune}. \n")
     print(f"Totale IRAP pagato nel periodo: {somma} \n")
     print(f"Quota IRAP media per azienda nel periodo: {somma/conta} \n")
