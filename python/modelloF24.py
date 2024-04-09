@@ -10,12 +10,12 @@ class ModelloF24:
 
     def prepara_f24(self):
         return {
-            "codice_fiscale": self.impresa.codice_fiscale,
+            "codice fiscale": self.impresa.codice_fiscale,
             "denominazione": self.impresa.denominazione,
-            "ragione_sociale": self.impresa.ragione_sociale,
-            "sede_legale": self.impresa.sede_legale,
-            "divisione_ateco": self.impresa.divisione_ateco,
-            "importo_irap": self.importo_irap,
+            "ragione sociale": self.impresa.ragione_sociale,
+            "sede legale": self.impresa.sede_legale,
+            "divisione ateco": self.impresa.divisione_ateco,
+            "importo irap": self.importo_irap,
             "data": self.data
         }
     

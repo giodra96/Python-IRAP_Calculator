@@ -12,7 +12,7 @@ def media_aritmetica(lista_imprese, parametro):
         media = somma / len(lista_imprese)
     except ZeroDivisionError as e: 
         print(e)
-    return {"La media aritmetica dei numeri di {parametro} è:": media}
+    return media
 
 #Metodo che restituisce la percentuale di aziende che hanno certificati di qualità
 #o che hanno fatturato compreso tra 10.000 e 50.000
@@ -26,8 +26,8 @@ def quality_company(lista_imprese):
                 c += 1
     if c!=0: #Verifica che la media aritmetica sia calcolabile
         perc = (c / len(lista_imprese))*100
-        return {f"La percentuale di aziende di qualità è: {perc}%"}
-    else: return "Non è stata trovata alcuna azienda di qualità"
+        return perc
+    else: return 0
 
 #Metodo che restituisce le aziende di qualità e che sono affiliate alla societa per azioni
 
@@ -45,6 +45,5 @@ def conta_aziende_per_ateco(lista_imprese):
     for impresa in lista_imprese:
         divisione_ateco = impresa.divisione_ateco #Salvo il valore di divisione ATECO
         divisioni_ateco[divisione_ateco] = divisioni_ateco.get(divisione_ateco, 0) + 1 #Incremento il valore della specifica divisione ATECO nel dizionario
-    for divisione_ateco, numero_aziende in divisioni_ateco.items(): #Stampo i valori del dizionario
-        print(f"{divisione_ateco}: {numero_aziende}")
+    return divisioni_ateco
 

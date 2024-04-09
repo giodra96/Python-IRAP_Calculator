@@ -27,12 +27,12 @@ def assegna_imprese(lista_comuni, lista_imprese):
 #Metodo principale
 
 def main ():
-    lista_imprese = test_1.leggi_listaimprese("imprese.txt") #Lettura delle imprese da un file.txt
+    lista_imprese = test_1.leggi_listaimprese("C:\\Users\\Giodra\\Desktop\\Master\\MasterAI\\python\\imprese.txt") #Lettura delle imprese da un file.txt
     lista_imprese = test_1.ordina_imprese(lista_imprese) #Ordinamento le imprese
     test_1.scrivi_imprese(lista_imprese, "imprese_ordinate.txt") #Scrittura delle imprese ordinate in un file.txt
-    print("Imprese presenti a sistema: \n\n")
+    print("Imprese presenti a sistema: \n")
     test_1.stampa_imprese(lista_imprese) #Stampa delle imprese
-    print(f"\n Numero totale delle persone coinvolte per ogni impresa {test_1.dizionario(lista_imprese)}") #Stampo il numero totale delle persone coinvolte per ogni impresa
+    print(f"\nNumero totale delle persone coinvolte per ogni impresa {test_1.dizionario(lista_imprese)} \n") #Stampo il numero totale delle persone coinvolte per ogni impresa
     lista_comuni = creazione_comuni(lista_imprese) #Creazione dei comuni a partire dalle imprese importate dal file.txt
     stop = False #Creazione di una variabile di controllo per la chiusura della chiamata del menu
     while (stop == False):
@@ -58,8 +58,6 @@ def main ():
                 stop = True
             case _: #Caso default
                 print("Scelta non valida")
-    for impresa in lista_imprese:
-        print(impresa.denominazione)
 
 if __name__ == "__main__":
     main()
