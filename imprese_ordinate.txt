@@ -1,0 +1,8 @@
+00865960157,Conad,Societa Cooperativa,Cosenza,C10,259,21,25,13-05-1962,True,23
+07211330159,Pirelli Tyre,Societa per Azioni,Milano,C22,1271,4,15,28-01-1872,True,4366
+00159560366,Ferrari,Societa per Azioni,Maranello,C29,4631,3,11,12-03-2024,True,14832
+04346220967,Will,Società Responsabilita Limitata,Milano,J58,10,2,1,13-05-1962,False,600
+09489670969,Nexi,Societa per Azioni,Milano,K64,102,8,13,10-11-2017,True,3260
+11931440017,Young Platform,Societa per Azioni,Torino,K64,60,6,8,13-05-1962,True,1605
+06131300722,Directa,Società Responsabilita Limitata,Torino,K64,12,3,2,13-05-1962,True,2296
+03592990794,Entopan Innovation,Societa Responsabilità Limitata,Catanzaro,M70,50,13,11,13-05-1962,False,1321

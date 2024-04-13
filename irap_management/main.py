@@ -27,7 +27,7 @@ def assegna_imprese(lista_comuni, lista_imprese):
 #Metodo principale
 
 def main ():
-    lista_imprese = test_1.leggi_listaimprese("C:\\Users\\Giodra\\Desktop\\Master\\MasterAI\\python\\imprese.txt") #Lettura delle imprese da un file.txt
+    lista_imprese = test_1.leggi_listaimprese("C:\\Users\\Giodra\\Desktop\\Master\\MasterAI\\irap_management\\imprese.txt") #Lettura delle imprese da un file.txt
     lista_imprese = test_1.ordina_imprese(lista_imprese) #Ordinamento le imprese
     test_1.scrivi_imprese(lista_imprese, "imprese_ordinate.txt") #Scrittura delle imprese ordinate in un file.txt
     print("Imprese presenti a sistema: \n")
