@@ -49,6 +49,7 @@ def aggiungi_comune(lista_comuni):
 #Metodo per la registrazione di un'impresa presso il comune
 
 def registra_impresa(lista_comuni, lista_imprese):
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
     stop = False #Inizializzo una variabile di controllo per la verifica della presenza dell'impresa già a sistema
     stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? "), "codice_fiscale", "Codice fiscale non valido")
@@ -58,7 +59,7 @@ def registra_impresa(lista_comuni, lista_imprese):
             stop = True
             break
     if (stop == False): #Creazione di un nuovo oggetto impresa con l'inserimento dei dati da input
-        sede_legale = input("Quale è la sede legale(nome del comune) dell'impresa? ")
+        sede_legale = input("Quale è la sede legale (nome del comune) dell'impresa? ")
         if not sede_legale[0].isupper(): #Verifica che la prima lettera sia maiuscola
             sede_legale = sede_legale.capitalize() #Setaggio della prima lettera maiuscola
         for comune in lista_comuni:
@@ -93,6 +94,7 @@ def registra_impresa(lista_comuni, lista_imprese):
 #Metodo che calcola l'IRAP per l'impresa
 
 def calcola_irap (lista_imprese):
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema") #Verifica della presenza di imprese nell'array
     stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
     nome = input("Di quale impresa vuoi calcolare l'IRAP? ")
     if not nome[0].isupper(): 
@@ -109,6 +111,8 @@ def calcola_irap (lista_imprese):
 #Metodo che emette un ModelloF24 per l'impresa
 
 def emissione_modellof24(lista_comuni, lista_imprese):
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema") #Verifica della presenza di imprese nell'array
     stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
     stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     nome = input("Di quale impresa vuoi emettere il modelloF24? ")
@@ -132,6 +136,7 @@ def emissione_modellof24(lista_comuni, lista_imprese):
 #Metodo che emette un ModelloF24 a ritroso per l'impresa
 
 def emissione_modellof24_ritroso(lista_comuni):
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
     print("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente. \n")
     stop = False
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? (11 cifre) "), "codice_fiscale", "Codice fiscale non valido")
@@ -174,6 +179,7 @@ def emissione_modellof24_ritroso(lista_comuni):
 #Metodo che stampa i ModelliF24 emessi per ogni comune
 
 def stampa_modelliF24(lista_comuni):
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
     nome_comune = input("Di quale comune vuoi visualizzare i modelliF24? ")
     if not nome_comune[0].isupper(): 
         nome_comune = nome_comune.capitalize()
@@ -187,6 +193,7 @@ def stampa_modelliF24(lista_comuni):
 #Metodo che restituisce un report con le statistiche sull'IRAP riscosso dal comune nel periodo
 
 def genera_report(lista_comuni):
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
     nome_comune = input("Di quale comune vuoi visualizzare il report? ")
     if not nome_comune[0].isupper(): 
         nome_comune = nome_comune.capitalize()
@@ -204,7 +211,7 @@ def genera_report(lista_comuni):
                     somma += modello.importo_irap
                     conta += 1
             break
-    if conta == 0: print(f"Nessuna impresa è stata rilasciata nell'intervallo indicato per il comune di {nome_comune} ")
+    if conta == 0: print(f"Nessun modelloF24 è stato rilasciato nell'intervallo indicato per il comune di {nome_comune} ")
     else: #Stampa delle statistiche
         print(f"Dati sulle imprese paganti dal comune di {comune.nome}. ")
         print(f"Numero di imprese paganti: {conta} ")

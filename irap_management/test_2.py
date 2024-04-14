@@ -18,6 +18,7 @@ def media_aritmetica(lista_imprese, parametro):
 #o che hanno fatturato compreso tra 10.000 e 50.000
 
 def quality_company(lista_imprese):
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese") #Verifica della presenza di imprese nell'array
     c = 0 #Contatore delle quality_company
     for impresa in lista_imprese:
             if impresa.certificazioni_qualita == True:
@@ -32,6 +33,7 @@ def quality_company(lista_imprese):
 #Metodo che restituisce le aziende di qualità e che sono affiliate alla societa per azioni
 
 def quality_stocks(lista_imprese):
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese") #Verifica della presenza di imprese nell'array
     df = pd.DataFrame([(impresa.denominazione, impresa.certificazioni_qualita, impresa.ragione_sociale) for impresa in lista_imprese],
                   columns=["Denominazione","Certificazioni di qualità", "Ragione Sociale"]) #Creo un DataFrame 
     #Filtro per le aziende di qualità e affiliate alla societa per azioni
@@ -41,6 +43,7 @@ def quality_stocks(lista_imprese):
 #Metoto che restituisce per ogni divisione ATECO il corrispettivo numero di aziende
 
 def conta_aziende_per_ateco(lista_imprese):
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese") #Verifica della presenza di imprese nell'array
     divisioni_ateco = {} #Creazione di un dizionario vuoto
     for impresa in lista_imprese:
         divisione_ateco = impresa.divisione_ateco #Salvo il valore di divisione ATECO

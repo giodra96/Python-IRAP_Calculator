@@ -24,7 +24,12 @@ def leggi_listaimprese(file_path):
                     bool(dati_impresa[9].lower()=="true"),
                     int(dati_impresa[10])
                 )
-                lista_imprese.append(impresa) #Aggiungo l'oggetto Impresa all'array lista_imprese
+                stop = False #Inizializzazione di una variabile di controllo
+                for impresa2 in lista_imprese: #Verifica che non esistono imprese già registrate con lo stesso codice fiscale 
+                    if impresa2.codice_fiscale == impresa.codice_fiscale:
+                        stop = True
+                if stop == False:
+                    lista_imprese.append(impresa) #Aggiungo l'oggetto Impresa all'array lista_imprese
     except FileNotFoundError as fe: #Catturo eventuale caso di errore
         print(fe)
     return lista_imprese
@@ -32,6 +37,7 @@ def leggi_listaimprese(file_path):
 #Metodo che crea un dizionario che associa ad ogni codice fiscale il numero di persone coinvolte nell'impresa
 
 def dizionario(lista_imprese):
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese") #Verifica della presenza di imprese nell'array
     #Creazione del dizionario
     n_dipendenti = {} #Creazione del dizionario
     for impresa in lista_imprese:
