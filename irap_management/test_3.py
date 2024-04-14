@@ -53,28 +53,28 @@ def registra_impresa(lista_comuni, lista_imprese):
     stop = False #Inizializzo una variabile di controllo per la verifica della presenza dell'impresa già a sistema
     stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? "), "codice_fiscale", "Codice fiscale non valido")
+    denominazione = input("Quale è il nome dell'impresa?")
+    if not denominazione[0].isupper(): 
+        denominazione = denominazione.capitalize()
     for impresa in lista_imprese:
-        if impresa.codice_fiscale == codice_fiscale:
+        if impresa.codice_fiscale == codice_fiscale and impresa.denominazione == denominazione:
             print("Impresa già registrata a sistema \n")
             stop = True
             break
     if (stop == False): #Creazione di un nuovo oggetto impresa con l'inserimento dei dati da input
-        sede_legale = input("Quale è la sede legale (nome del comune) dell'impresa? ")
-        if not sede_legale[0].isupper(): #Verifica che la prima lettera sia maiuscola
-            sede_legale = sede_legale.capitalize() #Setaggio della prima lettera maiuscola
+        sede = input("Quale è la sede (nome del comune) dell'impresa? ")
+        if not sede[0].isupper(): #Verifica che la prima lettera sia maiuscola
+            sede = sede.capitalize() #Setaggio della prima lettera maiuscola
         for comune in lista_comuni:
-            if comune.nome == sede_legale: #Verifica che esiste il comune per la registrazione dell'impresa
+            if comune.nome == sede: #Verifica che esiste il comune per la registrazione dell'impresa
                 stop2 == True
-                denominazione = input("Quale è il nome dell'impresa?")
-                if not denominazione[0].isupper(): 
-                    denominazione = denominazione.capitalize()
-                stop2 = False #Inizializzo una variabile di controllo per verificare che venga inserito un valore valido per la ragione sociale
-                while(stop2 == False):
+                stop3 = False #Inizializzo una variabile di controllo per verificare che venga inserito un valore valido per la ragione sociale
+                while(stop3 == False):
                     valori_ammessi = ["Societa per Azioni", "Societa Cooperativa", "Societa Responsabilita Limitata", "Impresa Individuale"]
                     ragione_sociale = input(f"Quale è la ragione sociale dell'impresa? \nValori ammessi: {valori_ammessi}: ")
                 if ragione_sociale not in valori_ammessi:
                     print("Valore non ammesso\n") #Messaggio di errore
-                else: stop2 = True  
+                else: stop3 = True  
                 divisione_ateco = input("Quale è la divisione ateco dell'impresa? ")
                 if not divisione_ateco.isupper(): #Verifica che tutte le lettere siano maiuscole
                     divisione_ateco = divisione_ateco.upper() #Settaggio di tutte le lettere in maiuscolo
@@ -84,7 +84,7 @@ def registra_impresa(lista_comuni, lista_imprese):
                 data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? (formato gg-mm-aaaa) "), "data", "Data di costituzione non valida")
                 certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Certificazioni di qualità non valide")
                 fatturato = valida_dato(input("Quale è il fatturato dell'impresa? "), "intero", "Fatturato non valido")
-                impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
+                impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
                 comune.registra_impresa(impresa) #Registrazione dell'impresa presso il comune
                 lista_imprese.append(impresa) #Aggiunta dell'impresa all'array lista_imprese
                 break
@@ -122,7 +122,7 @@ def emissione_modellof24(lista_comuni, lista_imprese):
         if nome == impresa.denominazione: #Verifica se l'impresa è presente
             stop = True
             for comune in lista_comuni:
-                if comune.nome == impresa.sede_legale: #Verifica se il comune è presente
+                if comune.nome == impresa.sede: #Verifica se il comune è presente
                     stop2 = True
                     data_oggi = date.today()
                     data_oggi = data_oggi.strftime("%d-%m-%Y")
@@ -140,11 +140,11 @@ def emissione_modellof24_ritroso(lista_comuni):
     print("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente. \n")
     stop = False
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? (11 cifre) "), "codice_fiscale", "Codice fiscale non valido")
-    sede_legale = input("Quale è la sede legale dell'impresa? ")
-    if not sede_legale[0].isupper():
-        sede_legale = sede_legale.capitalize()
+    sede = input("Quale è la sede legale dell'impresa? ")
+    if not sede[0].isupper():
+        sede = sede.capitalize()
     for comune in lista_comuni:
-        if comune.nome == sede_legale:
+        if comune.nome == sede:
             stop = True
             denominazione = input("Quale è il nome dell'impresa? ")
             if not denominazione[0].isupper(): 
@@ -165,7 +165,7 @@ def emissione_modellof24_ritroso(lista_comuni):
             data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? (formato gg-mm-aaaa) "), "data", "Data di costituzione non valida")
             certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Certificazioni di qualità non valide")
             fatturato = valida_dato(input("Quale è il fatturato dell'impresa? "), "intero", "Fatturato non valido")
-            impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
+            impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
             stop2 = False
             while stop2 == False:
                 data = valida_dato(input("In che data del passato vuoi emettere il modello? (formato gg-mm-aaaa) "), "data", "Data non valida")

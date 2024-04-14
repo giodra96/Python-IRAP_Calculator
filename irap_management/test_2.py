@@ -27,8 +27,8 @@ def quality_company(lista_imprese):
                 c += 1
     if c!=0: #Verifica che la media aritmetica sia calcolabile
         perc = (c / len(lista_imprese))*100
-        return perc
-    else: return 0
+        return str(perc) + "%"
+    else: return str(0) + "%"
 
 #Metodo che restituisce le aziende di qualità e che sono affiliate alla societa per azioni
 

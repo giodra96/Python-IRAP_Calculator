@@ -13,7 +13,7 @@ class ModelloF24:
             "codice fiscale": self.impresa.codice_fiscale,
             "denominazione": self.impresa.denominazione,
             "ragione sociale": self.impresa.ragione_sociale,
-            "sede legale": self.impresa.sede_legale,
+            "sede": self.impresa.sede,
             "divisione ateco": self.impresa.divisione_ateco,
             "importo irap": self.importo_irap,
             "data": self.data

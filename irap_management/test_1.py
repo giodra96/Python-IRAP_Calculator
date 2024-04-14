@@ -26,7 +26,7 @@ def leggi_listaimprese(file_path):
                 )
                 stop = False #Inizializzazione di una variabile di controllo
                 for impresa2 in lista_imprese: #Verifica che non esistono imprese già registrate con lo stesso codice fiscale 
-                    if impresa2.codice_fiscale == impresa.codice_fiscale:
+                    if impresa2.codice_fiscale == impresa.codice_fiscale and impresa2.denominazione == impresa.denominazione:
                         stop = True
                 if stop == False:
                     lista_imprese.append(impresa) #Aggiungo l'oggetto Impresa all'array lista_imprese
@@ -56,11 +56,11 @@ def ordina_imprese(lista_imprese):
 
 def stampa_imprese(lista_imprese):
     for impresa in lista_imprese:
-        print(f"Codice fiscale: {impresa.codice_fiscale}, Denominazione: {impresa.denominazione}, Ragione sociale: {impresa.ragione_sociale}, Sede legale: {impresa.sede_legale}, Divisione ATECO: {impresa.divisione_ateco}, Numero dipendenti: {impresa.numero_dipendenti}, Numero soci: {impresa.numero_soci}, Numero amministratori: {impresa.numero_amministratori}, Data costituzione: {impresa.data_costituzione}, Certificazioni qualità: {impresa.certificazioni_qualita}, Fatturato: {impresa.fatturato} \n")
+        print(f"Codice fiscale: {impresa.codice_fiscale}, Denominazione: {impresa.denominazione}, Ragione sociale: {impresa.ragione_sociale}, Sede legale: {impresa.sede}, Divisione ATECO: {impresa.divisione_ateco}, Numero dipendenti: {impresa.numero_dipendenti}, Numero soci: {impresa.numero_soci}, Numero amministratori: {impresa.numero_amministratori}, Data costituzione: {impresa.data_costituzione}, Certificazioni qualità: {impresa.certificazioni_qualita}, Fatturato: {impresa.fatturato} \n")
 
 #Metodo che scrive su file.txt tutte le imprese presenti nella lista lista_imprese
 
 def scrivi_imprese(lista_imprese, file_path):
     with open(file_path, "w") as file:
         for impresa in lista_imprese:
-            file.write(f"{impresa.codice_fiscale},{impresa.denominazione},{impresa.ragione_sociale},{impresa.sede_legale},{impresa.divisione_ateco},{impresa.numero_dipendenti},{impresa.numero_soci},{impresa.numero_amministratori},{impresa.data_costituzione},{impresa.certificazioni_qualita},{impresa.fatturato}\n")
+            file.write(f"{impresa.codice_fiscale},{impresa.denominazione},{impresa.ragione_sociale},{impresa.sede},{impresa.divisione_ateco},{impresa.numero_dipendenti},{impresa.numero_soci},{impresa.numero_amministratori},{impresa.data_costituzione},{impresa.certificazioni_qualita},{impresa.fatturato}\n")

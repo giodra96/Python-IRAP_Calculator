@@ -1,11 +1,11 @@
 #Definizione della classe Impresa
 
 class Impresa:
-    def __init__(self, codice_fiscale, denominazione, ragione_sociale, sede_legale, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato):
+    def __init__(self, codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato):
         self.codice_fiscale = codice_fiscale
         self.denominazione = denominazione
         self.ragione_sociale = ragione_sociale
-        self.sede_legale = sede_legale
+        self.sede = sede
         self.divisione_ateco = divisione_ateco
         self.numero_dipendenti = numero_dipendenti
         self.numero_soci = numero_soci

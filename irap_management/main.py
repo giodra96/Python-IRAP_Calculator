@@ -7,9 +7,9 @@ def creazione_comuni(lista_imprese):
     lista_comuni = [] #Creazione di una lista vuota per i comuni
     comunisegnati_visti = set() #Creazione di un set vuoto per i comuni già presenti
     for impresa in lista_imprese:
-        comunisegnati = impresa.sede_legale
+        comunisegnati = impresa.sede
         if comunisegnati not in comunisegnati_visti: #Se il comune non è già presente allora lo aggiungo
-            comune = Comune(impresa.sede_legale) #Creazione di un comune con il nome del comune
+            comune = Comune(impresa.sede) #Creazione di un comune con il nome del comune
             lista_comuni.append(comune)
             comunisegnati_visti.add(comunisegnati) #Aggiungo il comune all'interno del set
     assegna_imprese(lista_comuni, lista_imprese) #Assegno le imprese alle loro comuni
@@ -20,7 +20,7 @@ def creazione_comuni(lista_imprese):
 def assegna_imprese(lista_comuni, lista_imprese):
     for  impresa in lista_imprese:
         for comune in lista_comuni:
-            if impresa.sede_legale == comune.nome:
+            if impresa.sede == comune.nome:
                 if impresa not in comune.imprese_registrate: #Se l'impresa non è già registrata allora la registro
                     comune.registra_impresa(impresa)
 
