@@ -25,7 +25,7 @@ def leggi_listaimprese(file_path):
                     int(dati_impresa[10])
                 )
                 stop = False #Inizializzazione di una variabile di controllo
-                for impresa2 in lista_imprese: #Verifica che non esistono imprese già registrate con lo stesso codice fiscale 
+                for impresa2 in lista_imprese: #Verifica che non esistono imprese già registrate con lo stesso codice fiscale e denominazione
                     if impresa2.codice_fiscale == impresa.codice_fiscale and impresa2.denominazione == impresa.denominazione:
                         stop = True
                 if stop == False:
@@ -37,7 +37,7 @@ def leggi_listaimprese(file_path):
 #Metodo che crea un dizionario che associa ad ogni codice fiscale il numero di persone coinvolte nell'impresa
 
 def dizionario(lista_imprese):
-    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese") #Verifica della presenza di imprese nell'array
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese. ") #Verifica della presenza di imprese nell'array
     #Creazione del dizionario
     n_dipendenti = {} #Creazione del dizionario
     for impresa in lista_imprese:
@@ -56,7 +56,7 @@ def ordina_imprese(lista_imprese):
 
 def stampa_imprese(lista_imprese):
     for impresa in lista_imprese:
-        print(f"Codice fiscale: {impresa.codice_fiscale}, Denominazione: {impresa.denominazione}, Ragione sociale: {impresa.ragione_sociale}, Sede legale: {impresa.sede}, Divisione ATECO: {impresa.divisione_ateco}, Numero dipendenti: {impresa.numero_dipendenti}, Numero soci: {impresa.numero_soci}, Numero amministratori: {impresa.numero_amministratori}, Data costituzione: {impresa.data_costituzione}, Certificazioni qualità: {impresa.certificazioni_qualita}, Fatturato: {impresa.fatturato} \n")
+        print(f"Codice fiscale: {impresa.codice_fiscale}, Denominazione: {impresa.denominazione}, Ragione sociale: {impresa.ragione_sociale}, Sede: {impresa.sede}, Divisione ATECO: {impresa.divisione_ateco}, Numero dipendenti: {impresa.numero_dipendenti}, Numero soci: {impresa.numero_soci}, Numero amministratori: {impresa.numero_amministratori}, Data costituzione: {impresa.data_costituzione}, Certificazioni qualità: {impresa.certificazioni_qualita}, Fatturato: {impresa.fatturato} \n")
 
 #Metodo che scrive su file.txt tutte le imprese presenti nella lista lista_imprese
 

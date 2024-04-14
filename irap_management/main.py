@@ -1,7 +1,7 @@
 import test_1, test_3 #Importo i test 2 e 3 per poterli utilizzare nel main
 from comune import Comune #Importo la classe Comune
 
-#Metodo per la creazione dei comuni presenti (come attributo sede legale di un oggetto Impresa) in una lista di imprese
+#Metodo per la creazione dei comuni presenti (come attributo sede di un oggetto Impresa) in una lista di imprese
 
 def creazione_comuni(lista_imprese):
     lista_comuni = [] #Creazione di una lista vuota per i comuni
@@ -32,7 +32,7 @@ def main ():
     test_1.scrivi_imprese(lista_imprese, "imprese_ordinate.txt") #Scrittura delle imprese ordinate in un file.txt
     print("Imprese presenti a sistema: \n")
     test_1.stampa_imprese(lista_imprese) #Stampa delle imprese
-    print(f"\nNumero totale delle persone coinvolte per ogni impresa {test_1.dizionario(lista_imprese)} \n") #Stampo il numero totale delle persone coinvolte per ogni impresa
+    print(f"\nNumero totale delle persone coinvolte per ogni impresa {test_1.dizionario(lista_imprese)}. \n") #Stampo il numero totale delle persone coinvolte per ogni impresa
     lista_comuni = creazione_comuni(lista_imprese) #Creazione dei comuni a partire dalle imprese importate dal file.txt
     stop = False #Creazione di una variabile di controllo per la chiusura della chiamata del menu
     while (stop == False):
@@ -57,7 +57,7 @@ def main ():
             case "8":
                 stop = True
             case _: #Caso default
-                print("Scelta non valida")
+                print("Scelta non valida.")
 
 if __name__ == "__main__":
     main()

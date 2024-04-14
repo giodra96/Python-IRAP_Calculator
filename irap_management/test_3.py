@@ -10,7 +10,7 @@ def valida_dato(valore, tipo_dato, messaggio_errore):
         if tipo_dato == "intero": #Controllo per tipo int
             valore = int(valore)
             if valore < 1:
-                raise ValueError("Numero non valido")
+                raise ValueError("Numero non valido.")
             return valore
         elif tipo_dato == "data": #Controllo per tipo data
             datetime.strptime(valore, "%d-%m-%Y")
@@ -19,7 +19,7 @@ def valida_dato(valore, tipo_dato, messaggio_errore):
             return bool(valore.lower() in ["true", "True", "si", "Si", "s", "S"])
         elif tipo_dato == "codice_fiscale": #Controllo per tipo codice fiscale
             if len(str(valore)) != 11:
-                raise ValueError("Codice fiscale non valido")
+                raise ValueError("Codice fiscale non valido.")
             return int(valore)
     except ValueError:
         raise ValueError(messaggio_errore) #Ritorna il messaggio di errore passato come parametro
@@ -38,7 +38,7 @@ def aggiungi_comune(lista_comuni):
             nome = input("Quale è il nome del comune? ")
             for comune in lista_comuni:
                 if nome == comune.nome: #Verifica della presenza del comune
-                    print("Il comune è già presente a sistema \n")
+                    print("Il comune è già presente a sistema. \n")
                     stop2 = False
                     break
         comune = Comune(nome)
@@ -49,15 +49,16 @@ def aggiungi_comune(lista_comuni):
 #Metodo per la registrazione di un'impresa presso il comune
 
 def registra_impresa(lista_comuni, lista_imprese):
-    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema.") #Verifica della presenza di comuni nell'array
     stop = False #Inizializzo una variabile di controllo per la verifica della presenza dell'impresa già a sistema
     stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? "), "codice_fiscale", "Codice fiscale non valido")
-    denominazione = input("Quale è il nome dell'impresa?")
+    denominazione = input("Quale è il nome dell'impresa? ")
     if not denominazione[0].isupper(): 
         denominazione = denominazione.capitalize()
     for impresa in lista_imprese:
-        if impresa.codice_fiscale == codice_fiscale and impresa.denominazione == denominazione:
+        #Verifica che non esistono imprese già registrate con lo stesso codice fiscale e denominazione
+        if impresa.codice_fiscale == codice_fiscale and impresa.denominazione == denominazione: 
             print("Impresa già registrata a sistema \n")
             stop = True
             break
@@ -88,13 +89,13 @@ def registra_impresa(lista_comuni, lista_imprese):
                 comune.registra_impresa(impresa) #Registrazione dell'impresa presso il comune
                 lista_imprese.append(impresa) #Aggiunta dell'impresa all'array lista_imprese
                 break
-    if stop2 == False: print("Il comune della sede legale dell'impresa non è registrato a sistema \n") 
+    if stop2 == False: print("Il comune della sede dell'impresa non è registrato a sistema. \n") 
     return {"imprese": lista_imprese, "comuni": lista_comuni}
 
 #Metodo che calcola l'IRAP per l'impresa
 
 def calcola_irap (lista_imprese):
-    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema") #Verifica della presenza di imprese nell'array
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema. ") #Verifica della presenza di imprese nell'array
     stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
     nome = input("Di quale impresa vuoi calcolare l'IRAP? ")
     if not nome[0].isupper(): 
@@ -106,13 +107,13 @@ def calcola_irap (lista_imprese):
             break
     if stop != False: #Se l'impresa non è presente stampo un errore
         return totale_irap
-    else: print("L'impresa non è registrata a sistema \n")
+    else: print("L'impresa non è registrata a sistema. \n")
 
 #Metodo che emette un ModelloF24 per l'impresa
 
 def emissione_modellof24(lista_comuni, lista_imprese):
-    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
-    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema") #Verifica della presenza di imprese nell'array
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema. ") #Verifica della presenza di comuni nell'array
+    if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema. ") #Verifica della presenza di imprese nell'array
     stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
     stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     nome = input("Di quale impresa vuoi emettere il modelloF24? ")
@@ -125,22 +126,22 @@ def emissione_modellof24(lista_comuni, lista_imprese):
                 if comune.nome == impresa.sede: #Verifica se il comune è presente
                     stop2 = True
                     data_oggi = date.today()
-                    data_oggi = data_oggi.strftime("%d-%m-%Y")
+                    data_oggi = data_oggi.strftime("%d-%m-%Y") #Trasformo la data in una stringa
                     comune.emetti_modello_f24(impresa, data_oggi) #Emetto il ModelloF24 con la data odierna
-                    print("Modello F24 emesso \n")
+                    print("Modello F24 emesso. \n")
                     break
         if stop2 == True: break
-    if stop == False: print("L'impresa non è registrata a sistema \n")
-    elif stop2 == False: print("Il comune della sede legale dell'impresa non è registrato a sistema \n")
+    if stop == False: print("L'impresa non è registrata a sistema. \n")
+    elif stop2 == False: print("Il comune della sede dell'impresa non è registrato a sistema. \n")
 
 #Metodo che emette un ModelloF24 a ritroso per l'impresa
 
 def emissione_modellof24_ritroso(lista_comuni):
-    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema. ") #Verifica della presenza di comuni nell'array
     print("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente. \n")
     stop = False
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? (11 cifre) "), "codice_fiscale", "Codice fiscale non valido")
-    sede = input("Quale è la sede legale dell'impresa? ")
+    sede = input("Quale è la sede dell'impresa? ")
     if not sede[0].isupper():
         sede = sede.capitalize()
     for comune in lista_comuni:
@@ -154,7 +155,7 @@ def emissione_modellof24_ritroso(lista_comuni):
                 valori_ammessi = ["Societa per Azioni", "Societa Cooperativa", "Societa Responsabilita Limitata", "Impresa Individuale"]
                 ragione_sociale = input(f"Quale è la ragione sociale dell'impresa? \nValori ammessi: {valori_ammessi}: ")
                 if ragione_sociale not in valori_ammessi:
-                    print("Valore non ammesso\n")
+                    print("Valore non ammesso. \n")
                 else: stop2 = True  
             divisione_ateco = input("Quale è la divisione ateco dell'impresa? ")
             if not divisione_ateco.isupper(): #Verifica che tutte le lettere siano maiuscole
@@ -172,28 +173,32 @@ def emissione_modellof24_ritroso(lista_comuni):
                 if datetime.strptime(data, "%d-%m-%Y") < datetime.strptime(data_costituzione, "%d-%m-%Y"): print("Data antecedente alla data di costituzione dell'impresa ")
                 else: stop2 = True
             comune.emetti_modello_f24(impresa, data) #Emissione del ModelloF24 con data nel passato
-            print("Modello F24 emesso \n")
+            print("Modello F24 emesso. \n")
             break
-    if stop == False: print("Non esiste il comune corrispodente alla sede legale esplicitata per l'impresa a sistema ")
+    if stop == False: print("Non esiste il comune corrispodente alla sede esplicitata per l'impresa a sistema. ")
 
 #Metodo che stampa i ModelliF24 emessi per ogni comune
 
 def stampa_modelliF24(lista_comuni):
-    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema. ") #Verifica della presenza di comuni nell'array
     nome_comune = input("Di quale comune vuoi visualizzare i modelliF24? ")
     if not nome_comune[0].isupper(): 
         nome_comune = nome_comune.capitalize()
     for comune in lista_comuni:
         if comune.nome == nome_comune:
+            if len(comune.modelli_f24_emessi) == 0:
+                print(f"Per il comune {comune.nome} non esistono ModelliF24 emessi. ")
             print(f"Ecco la lista dei ModelliF24 emessi dal comune di {comune.nome}: ")
             for modello in comune.modelli_f24_emessi:
                 print(f"\n{modello.prepara_f24()}\n") #Prepara_f24 restituisce un dizionario con i dati del modello
-            break
+            return
+    print("Il comune non è registrato a sistema. ")
+    
 
 #Metodo che restituisce un report con le statistiche sull'IRAP riscosso dal comune nel periodo
 
 def genera_report(lista_comuni):
-    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema") #Verifica della presenza di comuni nell'array
+    if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema. ") #Verifica della presenza di comuni nell'array
     nome_comune = input("Di quale comune vuoi visualizzare il report? ")
     if not nome_comune[0].isupper(): 
         nome_comune = nome_comune.capitalize()
