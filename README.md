@@ -5,7 +5,7 @@ La cartella **irap_management** contiene il programma principale per gestire il 
 
 Per comprendere appieno il funzionamento del programma e imparare come utilizzarlo, consulta il file **Readme** associato.
 
-## Avvio del programma
+### Avvio del programma
 
 Segui questi passaggi per avviare il programma:
 
@@ -44,7 +44,13 @@ Utilizza **pip** per installare le dipendenze necessarie elencate nel file **req
 $ pip3 install -r requirements.txt
 ```
 
-# Parte 2: db_integration
+## Parte 2: db_integration
+
+Per comprendere appieno il funzionamento del programma e imparare come utilizzarlo, consulta il file **Readme** associato.
+
+### Avvio del programma
+
+Segui questi passaggi per avviare il programma:
 
 1. **Naviga nella cartella del progetto:**
 ```

@@ -94,7 +94,7 @@ def registra_impresa(lista_comuni, lista_imprese):
 
 #Metodo che calcola l'IRAP per l'impresa
 
-def calcola_irap (lista_imprese):
+def calcola_irap(lista_imprese):
     if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema. ") #Verifica della presenza di imprese nell'array
     stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
     nome = input("Di quale impresa vuoi calcolare l'IRAP? ")
