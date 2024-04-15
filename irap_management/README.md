@@ -1,6 +1,6 @@
-# irapp_management
+# irap_management
 
-Benvenuti nel programma pper il calcolo dell'IRAP per le imprerse. Qui troverete la descrizione della funzionalità e i passaggi per l'utilizzo.
+Benvenuti nel programma per il calcolo dell'IRAP per le imprerse. Qui troverete la descrizione della funzionalità e i passaggi per l'utilizzo.
 
 ## Descrizione delle classi
 
