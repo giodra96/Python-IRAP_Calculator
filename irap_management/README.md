@@ -38,7 +38,7 @@ Benvenuti nel programma per il calcolo dell'IRAP per le imprerse. Qui troverete 
 
 ## Descrizione dei test
 
-1. test_1
+1. **test_1**
 
     Questo primo test definisce i seguenti metodi:
 
@@ -48,7 +48,7 @@ Benvenuti nel programma per il calcolo dell'IRAP per le imprerse. Qui troverete 
     - stampa_imprese(lista_imprese): stampa le informazioni delle imprese 
     - scrivi_imprese(lista_imprese, file_path): scrive le informazioni delle imprese in un file.txt
 
-2. test_2
+2. **test_2**
 
     Questo secondo test definisce i seguenti metodi:
 
@@ -57,7 +57,7 @@ Benvenuti nel programma per il calcolo dell'IRAP per le imprerse. Qui troverete 
     - quality_stocks(lista_imprese): restituisce le imprese con ragione sociale "Società per Azioni" e certificazioni di qualità
     - conta_aziende_per_ateco(lista_imprese): restituisce un dizionario con il codice ateco come chiave e il relativo numero di aziende come valore
 
-3. test_3
+3. **test_3**
 
     Questo terzo test definisce i seguenti metodi:
 
