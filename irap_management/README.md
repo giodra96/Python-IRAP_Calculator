@@ -1,8 +1,8 @@
-#irapp_management
+# irapp_management
 
 Benvenuti nel programma pper il calcolo dell'IRAP per le imprerse. Qui troverete la descrizione della funzionalità e i passaggi per l'utilizzo.
 
-##Descrizione delle classi
+## Descrizione delle classi
 
 1. **Impresa** -> Classe che definisce la struttura di un impresa attraverso i seguenti parametri:
     - codice_fiscale: stringa di lunghezza 11 che rappresenta il codice fiscale dell'impresa e deve essere univoca
@@ -36,7 +36,7 @@ Benvenuti nel programma pper il calcolo dell'IRAP per le imprerse. Qui troverete
     La classe comprende i seguenti metodi:
     - prepara_f24(): restituisce il modelloF24 
 
-##Descrizione dei test
+## Descrizione dei test
 
 1. test_1
 
@@ -70,7 +70,7 @@ Benvenuti nel programma pper il calcolo dell'IRAP per le imprerse. Qui troverete
     - stampa_modelliF24(lista_comuni): permette all'utente di visualizzare la lista di modelliF24 emessi per un comune
     - genera_report(lista_comuni): permette all'utente di generare un report con le informazioni sull'IRAP riscossa per un comune
 
-##Main
+## Main
 
 Infine, nella funzione main sono presenti due metodi:
 
