@@ -36,7 +36,7 @@ def main ():
     lista_comuni = creazione_comuni(lista_imprese) #Creazione dei comuni a partire dalle imprese importate dal file.txt
     stop = False #Creazione di una variabile di controllo per la chiusura della chiamata del menu
     while (stop == False):
-        value = input("Scegli un'opzione: \n 1: Aggiungi un nuovo comune  \n 2: Registra un'impresa presso il comune \n 3: Calcola IRAP per l'impresa \n 4: Emissione del modelloF24 per un'impresa \n 5: Emissione del modelloF24 a ritroso per un'impresa \n 6: Visualizza Modelli F24 per comune \n 7: Report IRAP \n 8: Esci \n")
+        value = input("Scegli un'opzione: \n 1: Aggiungi un nuovo comune \n 2: Registra un'impresa presso il comune \n 3: Calcola IRAP per l'impresa \n 4: Emissione del modelloF24 per un'impresa \n 5: Emissione del modelloF24 a ritroso per un'impresa \n 6: Visualizza Modelli F24 per comune \n 7: Report IRAP \n 8: Esci \n")
         match value:
             case "1": #Aggiunta di un nuovo comune
                 lista_comuni = test_3.aggiungi_comune(lista_comuni)

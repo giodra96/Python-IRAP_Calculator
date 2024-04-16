@@ -50,8 +50,6 @@ def aggiungi_comune(lista_comuni):
 
 def registra_impresa(lista_comuni, lista_imprese):
     if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema.") #Verifica della presenza di comuni nell'array
-    stop = False #Inizializzo una variabile di controllo per la verifica della presenza dell'impresa già a sistema
-    stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? (11 cifre) "), "codice_fiscale", "Codice fiscale non valido")
     denominazione = input("Quale è il nome dell'impresa? ")
     if not denominazione[0].isupper(): 
@@ -60,108 +58,114 @@ def registra_impresa(lista_comuni, lista_imprese):
         #Verifica che non esistono imprese già registrate con lo stesso codice fiscale e denominazione
         if impresa.codice_fiscale == codice_fiscale and impresa.denominazione == denominazione: 
             print("Impresa già registrata a sistema \n")
-            stop = True
-            break
-    if (stop == False): #Creazione di un nuovo oggetto impresa con l'inserimento dei dati da input
-        sede = input("Quale è la sede (nome del comune) dell'impresa? ")
-        if not sede[0].isupper(): #Verifica che la prima lettera sia maiuscola
-            sede = sede.capitalize() #Setaggio della prima lettera maiuscola
-        for comune in lista_comuni:
-            if comune.nome == sede: #Verifica che esiste il comune per la registrazione dell'impresa
-                stop2 == True
-                stop3 = False #Inizializzo una variabile di controllo per verificare che venga inserito un valore valido per la ragione sociale
-                while(stop3 == False):
-                    valori_ammessi = ["Societa per Azioni", "Societa Cooperativa", "Societa Responsabilita Limitata", "Impresa Individuale"]
-                    ragione_sociale = input(f"Quale è la ragione sociale dell'impresa? \nValori ammessi: {valori_ammessi}: ")
-                    if ragione_sociale not in valori_ammessi:
-                        print("Valore non ammesso\n") #Messaggio di errore
-                    else: stop3 = True  
-                divisione_ateco = input("Quale è la divisione ateco dell'impresa? ")
-                if not divisione_ateco.isupper(): #Verifica che tutte le lettere siano maiuscole
-                    divisione_ateco = divisione_ateco.upper() #Settaggio di tutte le lettere in maiuscolo
-                numero_dipendenti = valida_dato(input("Quale è il numero di dipendenti dell'impresa? "), "intero", "Numero di dipendenti non valido")
-                numero_soci = valida_dato(input("Quale è il numero di soci dell'impresa? "), "intero", "Numero di soci non valido")
-                numero_amministratori = valida_dato(input("Quale è il numero di amministratori dell'impresa? "), "intero", "Numero di amministratori non valido")
-                stop4 = False #Inizializzazione di una variabile per il controllo sulla data
-                data_oggi = date.today() #Salvataggio della data odierna
-                data_oggi = data_oggi.strftime("%d-%m-%Y") #Conversione in una stringa
-                data_oggi = datetime.strptime(data_oggi, "%d-%m-%Y") #Conversione in datetime per poterlo confrontare
-                while(stop4 == False): #Finché la data inserita è maggiore di quella odierna il sistema la richiede
-                    data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? (formato gg-mm-aaaa) "), "data", "Data di costituzione non valida")
-                    if datetime.strptime(data_costituzione, "%d-%m-%Y") > data_oggi: print("Data successiva a quella odierna. ")
-                    else: stop4 = True
-                certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Valore inserito non valido")
-                fatturato = valida_dato(input("Quale è il fatturato dell'impresa? (espresso in € e senza decimali) "), "intero", "Fatturato non valido")
-                impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
-                comune.registra_impresa(impresa) #Registrazione dell'impresa presso il comune
-                lista_imprese.append(impresa) #Aggiunta dell'impresa all'array lista_imprese
-                break
-    if stop2 == False: print("Il comune della sede dell'impresa non è registrato a sistema. Per procedere registralo come nuovo comune. \n") 
+            return {"imprese": lista_imprese, "comuni": lista_comuni}
+    sede = input("Quale è la sede (nome del comune) dell'impresa? ")
+    if not sede[0].isupper(): #Verifica che la prima lettera sia maiuscola
+        sede = sede.capitalize() #Setaggio della prima lettera maiuscola
+    for comune in lista_comuni:
+        if comune.nome == sede: #Verifica che esiste il comune per la registrazione dell'impresa
+            stop = False #Inizializzo una variabile di controllo per verificare che venga inserito un valore valido per la ragione sociale
+            while(stop == False):
+                valori_ammessi = ["Societa per Azioni", "Societa Cooperativa", "Societa Responsabilita Limitata", "Impresa Individuale"]
+                ragione_sociale = input(f"Quale è la ragione sociale dell'impresa? \nValori ammessi: {valori_ammessi}: ")
+                if ragione_sociale not in valori_ammessi:
+                    print("Valore non ammesso. \n") #Messaggio di errore
+                else: stop = True  
+            divisione_ateco = input("Quale è la divisione ateco dell'impresa? ")
+            if not divisione_ateco.isupper(): #Verifica che tutte le lettere siano maiuscole
+                divisione_ateco = divisione_ateco.upper() #Settaggio di tutte le lettere in maiuscolo
+            numero_dipendenti = valida_dato(input("Quale è il numero di dipendenti dell'impresa? "), "intero", "Numero di dipendenti non valido")
+            numero_soci = valida_dato(input("Quale è il numero di soci dell'impresa? "), "intero", "Numero di soci non valido")
+            numero_amministratori = valida_dato(input("Quale è il numero di amministratori dell'impresa? "), "intero", "Numero di amministratori non valido")
+            data_oggi = date.today() #Salvataggio della data odierna
+            data_oggi = data_oggi.strftime("%d-%m-%Y") #Conversione in una stringa
+            data_oggi = datetime.strptime(data_oggi, "%d-%m-%Y") #Conversione in datetime per poterlo confrontare
+            stop = False
+            while(stop == False): #Finché la data inserita è maggiore di quella odierna il sistema la richiede
+                data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? (formato gg-mm-aaaa) "), "data", "Data di costituzione non valida")
+                if datetime.strptime(data_costituzione, "%d-%m-%Y") > data_oggi: print("Data successiva a quella odierna. ")
+                else: stop = True
+            certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Valore inserito non valido")
+            fatturato = valida_dato(input("Quale è il fatturato dell'impresa? (espresso in € e senza decimali) "), "intero", "Fatturato non valido")
+            impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
+            comune.registra_impresa(impresa) #Registrazione dell'impresa presso il comune
+            lista_imprese.append(impresa) #Aggiunta dell'impresa all'array lista_imprese
+            return {"imprese": lista_imprese, "comuni": lista_comuni}
+    print("Il comune della sede dell'impresa non è registrato a sistema. Per procedere registralo come nuovo comune. \n") 
     return {"imprese": lista_imprese, "comuni": lista_comuni}
 
 #Metodo che calcola l'IRAP per l'impresa
 
 def calcola_irap(lista_imprese):
     if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema. ") #Verifica della presenza di imprese nell'array
-    stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
     nome = input("Di quale impresa vuoi calcolare l'IRAP? ")
     if not nome[0].isupper(): 
         nome = nome.capitalize()
     for impresa in lista_imprese:
         if nome == impresa.denominazione: #Verifica se l'impresa è presente
             totale_irap = impresa.calcola_irap()
-            stop = True
-            break
-    if stop != False: #Se l'impresa non è presente stampo un errore
-        print(f"Totale IRAP per l'impresa {nome}: {totale_irap}€ \n")
-    else: print(f"L'impresa {nome} non è registrata a sistema. \n")
+            print(f"Totale IRAP per l'impresa {nome}: {totale_irap}€ \n")
+            return
+    print(f"L'impresa {nome} non è registrata a sistema. \n")
 
 #Metodo che emette un ModelloF24 per l'impresa
 
 def emissione_modellof24(lista_comuni, lista_imprese):
     if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema. ") #Verifica della presenza di comuni nell'array
     if len(lista_imprese) == 0: raise ValueError("Non sono presenti imprese registrate a sistema. ") #Verifica della presenza di imprese nell'array
-    stop = False #Inizializzo una variabile di controllo per verificare la presenza dell'impresa
-    stop2 = False #Inizializzo una variabile di controllo per verificare la presenza del comune
     nome = input("Di quale impresa vuoi emettere il modelloF24? ")
     if not nome[0].isupper(): 
         nome = nome.capitalize()
     for impresa in lista_imprese:
         if nome == impresa.denominazione: #Verifica se l'impresa è presente
-            stop = True
             for comune in lista_comuni:
                 if comune.nome == impresa.sede: #Verifica se il comune è presente
-                    stop2 = True
                     data_oggi = date.today()
                     data_oggi = data_oggi.strftime("%d-%m-%Y") #Trasformo la data in una stringa
-                    comune.emetti_modello_f24(impresa, data_oggi) #Emetto il ModelloF24 con la data odierna
+                    data_oggi = datetime.strptime(data_oggi, "%d-%m-%Y") 
+                    modelli = comune.modelli_f24_emessi
+                    for modello in modelli: #Verifica che il modello per quella impresa non sia stato già emesso quest'anno
+                        if modello.impresa == impresa:
+                             #Conversione in datetime per poterlo confrontare
+                            if datetime.strptime(modello.data, "%d-%m-%Y").year < data_oggi.year: 
+                                comune.emetti_modello_f24(impresa, data_oggi.strftime("%d-%m-%Y")) #Emetto il ModelloF24 con la data odierna
+                                print("Modello F24 emesso. \n")
+                                return
+                            else: #Il modello è già stato emesso per l'anno in corso, il sistema chiede all'utente se vuole sovrascriverlo
+                                answer = valida_dato(input("Il modello è già stato emesso quest'anno per l'impresa, vuoi sovrascriverlo? (S/N) "), "booleano", "Valore inserito non valido")
+                                if answer == True: 
+                                    modello = comune.emetti_modello_f24(impresa, data_oggi.strftime("%d-%m-%Y"))
+                                    print("Il modello è stato sovrascritto. \n")
+                                    return
+                                else: 
+                                    print("Il modello non è stato sovrascritto. \n")
+                                    return
+                    comune.emetti_modello_f24(impresa, data_oggi.strftime("%d-%m-%Y")) #Emetto il ModelloF24 con la data odierna
                     print("Modello F24 emesso. \n")
-                    break
-        if stop2 == True: break
-    if stop == False: print("L'impresa non è registrata a sistema. \n")
+                    return
+    print("L'impresa non è registrata a sistema. \n")
+    
 #Metodo che emette un ModelloF24 a ritroso per l'impresa
 
 def emissione_modellof24_ritroso(lista_comuni):
     if len(lista_comuni) == 0: raise ValueError("Non sono presenti comuni registrati a sistema. ") #Verifica della presenza di comuni nell'array
     print("Inserisci i dati dell'azienda per l'emissione del Modello F24 in una data antecedente. \n")
-    stop = False
     codice_fiscale = valida_dato(input("Quale è il codice fiscale dell'impresa? (11 cifre) "), "codice_fiscale", "Codice fiscale non valido")
     sede = input("Quale è la sede dell'impresa? ")
     if not sede[0].isupper():
         sede = sede.capitalize()
     for comune in lista_comuni:
         if comune.nome == sede:
-            stop = True
             denominazione = input("Quale è il nome dell'impresa? ")
             if not denominazione[0].isupper(): 
                 denominazione = denominazione.capitalize()
-            stop2 = False
-            while(stop2 == False):
+            stop = False
+            while(stop == False):
                 valori_ammessi = ["Societa per Azioni", "Societa Cooperativa", "Societa Responsabilita Limitata", "Impresa Individuale"]
                 ragione_sociale = input(f"Quale è la ragione sociale dell'impresa? \nValori ammessi: {valori_ammessi}: ")
                 if ragione_sociale not in valori_ammessi:
                     print("Valore non ammesso. \n")
-                else: stop2 = True  
+                else: stop = True  
             divisione_ateco = input("Quale è la divisione ateco dell'impresa? ")
             if not divisione_ateco.isupper(): #Verifica che tutte le lettere siano maiuscole
                 divisione_ateco = divisione_ateco.upper()
@@ -172,19 +176,28 @@ def emissione_modellof24_ritroso(lista_comuni):
             certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Valore inserito non valido")
             fatturato = valida_dato(input("Quale è il fatturato dell'impresa? (espresso in € e senza decimali) "), "intero", "Fatturato non valido")
             impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
-            stop2 = False
             data_oggi = date.today() #Salvataggio della data odierna
             data_oggi = data_oggi.strftime("%d-%m-%Y") #Conversione in una stringa
             data_oggi = datetime.strptime(data_oggi, "%d-%m-%Y") #Conversione in datetime per poterlo confrontare
-            while stop2 == False:
-                data = valida_dato(input("In che data del passato vuoi emettere il modello? (formato gg-mm-aaaa) "), "data", "Data non valida")
-                if datetime.strptime(data, "%d-%m-%Y") < datetime.strptime(data_costituzione, "%d-%m-%Y"): print("Data antecedente alla data di costituzione dell'impresa ")
-                elif data_oggi < datetime.strptime(data, "%d-%m-%Y"): print("Data successiva alla data odierna ")
-                else: stop2 = True
+            data = valida_dato(input("In che data del passato vuoi emettere il modello? (formato gg-mm-aaaa) "), "data", "Data non valida")
+            if datetime.strptime(data, "%d-%m-%Y") < datetime.strptime(data_costituzione, "%d-%m-%Y"): print("Data antecedente alla data di costituzione dell'impresa. \n")
+            elif data_oggi < datetime.strptime(data, "%d-%m-%Y"): print("Data successiva alla data odierna. \n")
+            modelli = comune.modelli_f24_emessi
+            for modello in modelli:
+                if modello.impresa == impresa:
+                    if datetime.strptime(data, "%d-%m-%Y").year == datetime.strptime(modello.data, "%d-%m-%Y").year:
+                        answer = valida_dato(input("Il modello è già stato emesso nell'anno indicato per l'impresa, vuoi sovrascriverlo? (S/N) "), "booleano", "Valore inserito non valido")
+                        if answer == True: 
+                            modello = comune.emetti_modello_f24(impresa, data)
+                            print("Il modello è stato sovrascritto. \n")
+                            return
+                        else: 
+                            print("Il modello non è stato sovrascritto. \n")
+                            return
             comune.emetti_modello_f24(impresa, data) #Emissione del ModelloF24 con data nel passato
             print("Modello F24 emesso. \n")
-            break
-    if stop == False: print("Il comune della sede dell'impresa non è registrato a sistema. Per procedere registralo come nuovo comune. ")
+            return
+    print("Il comune della sede dell'impresa non è registrato a sistema. Per procedere registralo come nuovo comune. ")
 
 #Metodo che stampa i ModelliF24 emessi per ogni comune
 
