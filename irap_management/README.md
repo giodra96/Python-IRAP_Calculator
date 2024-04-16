@@ -74,7 +74,7 @@ Benvenuti nel programma per il calcolo dell'IRAP per le imprerse. Qui troverete 
 
 Infine, nella funzione main sono presenti due metodi:
 
-- creazione_comuni(lista_imprese): registra a sistema oggetti Comune per tutte le sedi delle imprese importate dal file .txt
-- assegna_imprese(lista_comuni, lista_imprese): registra le imprese importate nel file .txt nei rispettivi comuni 
+- creazione_comuni(lista_imprese): registra a sistema oggetti Comune per tutte le sedi delle imprese importate dal file.txt
+- assegna_imprese(lista_comuni, lista_imprese): registra le imprese importate nel file.txt nei rispettivi comuni 
 
 Dal metodo main sarà poi possibile accedere a tutte le funzionalità del programma attraverso un'apposito switch.

@@ -32,7 +32,7 @@ def main ():
     test_1.scrivi_imprese(lista_imprese, "imprese_ordinate.txt") #Scrittura delle imprese ordinate in un file.txt
     print("Imprese presenti a sistema: \n")
     test_1.stampa_imprese(lista_imprese) #Stampa delle imprese
-    print(f"\nNumero totale delle persone coinvolte per ogni impresa {test_1.dizionario(lista_imprese)}. \n") #Stampo il numero totale delle persone coinvolte per ogni impresa
+    print(f"\nNumero totale delle persone coinvolte per ogni impresa:\n {test_1.dizionario(lista_imprese)}. \n") #Stampo il numero totale delle persone coinvolte per ogni impresa
     lista_comuni = creazione_comuni(lista_imprese) #Creazione dei comuni a partire dalle imprese importate dal file.txt
     stop = False #Creazione di una variabile di controllo per la chiusura della chiamata del menu
     while (stop == False):
@@ -45,7 +45,7 @@ def main ():
                 lista_comuni = output["comuni"] #Aggiorno le liste dei comuni e delle imprese
                 lista_imprese = output["imprese"]
             case "3": #Calcolo IRAP per l'impresa
-                print(f"{test_3.calcola_irap(lista_imprese)} \n")
+                test_3.calcola_irap(lista_imprese)
             case "4": #Emissione del modello F24 per un'impresa
                 test_3.emissione_modellof24(lista_comuni, lista_imprese)
             case "5": #Emissione del modello F24 a ritroso per un'impresa
