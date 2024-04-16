@@ -172,13 +172,19 @@ def emissione_modellof24_ritroso(lista_comuni):
             numero_dipendenti = valida_dato(input("Quale è il numero di dipendenti dell'impresa? "), "intero", "Numero di dipendenti non valido")
             numero_soci = valida_dato(input("Quale è il numero di soci dell'impresa? "), "intero", "Numero di soci non valido")
             numero_amministratori = valida_dato(input("Quale è il numero di amministratori dell'impresa? "), "intero", "Numero di amministratori non valido")
-            data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? (formato gg-mm-aaaa) "), "data", "Data di costituzione non valida")
-            certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Valore inserito non valido")
-            fatturato = valida_dato(input("Quale è il fatturato dell'impresa? (espresso in € e senza decimali) "), "intero", "Fatturato non valido")
-            impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
             data_oggi = date.today() #Salvataggio della data odierna
             data_oggi = data_oggi.strftime("%d-%m-%Y") #Conversione in una stringa
             data_oggi = datetime.strptime(data_oggi, "%d-%m-%Y") #Conversione in datetime per poterlo confrontare
+            stop = False
+            while(stop == False):
+                data_costituzione = valida_dato(input("Quale è la data di costituzione dell'impresa? (formato gg-mm-aaaa) "), "data", "Data di costituzione non valida")
+                if datetime.strptime(data_costituzione) < data_oggi:
+                    print("Data successiva alla data odierna. \n")
+                    stop = True
+            certificazioni_qualita = valida_dato(input("L'impresa ha certificazioni di qualità? (S/N) "), "booleano", "Valore inserito non valido")
+            fatturato = valida_dato(input("Quale è il fatturato dell'impresa? (espresso in € e senza decimali) "), "intero", "Fatturato non valido")
+            impresa = Impresa(codice_fiscale, denominazione, ragione_sociale, sede, divisione_ateco, numero_dipendenti, numero_soci, numero_amministratori, data_costituzione, certificazioni_qualita, fatturato)
+            
             data = valida_dato(input("In che data del passato vuoi emettere il modello? (formato gg-mm-aaaa) "), "data", "Data non valida")
             if datetime.strptime(data, "%d-%m-%Y") < datetime.strptime(data_costituzione, "%d-%m-%Y"): print("Data antecedente alla data di costituzione dell'impresa. \n")
             elif data_oggi < datetime.strptime(data, "%d-%m-%Y"): print("Data successiva alla data odierna. \n")
