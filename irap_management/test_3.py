@@ -125,8 +125,8 @@ def emissione_modellof24(lista_comuni, lista_imprese):
                     data_oggi = datetime.strptime(data_oggi, "%d-%m-%Y") 
                     modelli = comune.modelli_f24_emessi
                     for modello in modelli: #Verifica che il modello per quella impresa non sia stato già emesso quest'anno
-                        if modello.impresa == impresa:
-                             #Conversione in datetime per poterlo confrontare
+                        if modello.impresa.codice_fiscale == impresa.codice_fiscale and modello.impresa.denominazione == impresa.denominazione:
+                            #Conversione in datetime per poterlo confrontare
                             if datetime.strptime(modello.data, "%d-%m-%Y").year < data_oggi.year: 
                                 comune.emetti_modello_f24(impresa, data_oggi.strftime("%d-%m-%Y")) #Emetto il ModelloF24 con la data odierna
                                 print("Modello F24 emesso. \n")
@@ -184,7 +184,7 @@ def emissione_modellof24_ritroso(lista_comuni):
             elif data_oggi < datetime.strptime(data, "%d-%m-%Y"): print("Data successiva alla data odierna. \n")
             modelli = comune.modelli_f24_emessi
             for modello in modelli:
-                if modello.impresa == impresa:
+                if modello.impresa.codice_fiscale == impresa.codice_fiscale and modello.impresa.denominazione == impresa.denominazione:
                     if datetime.strptime(data, "%d-%m-%Y").year == datetime.strptime(modello.data, "%d-%m-%Y").year:
                         answer = valida_dato(input("Il modello è già stato emesso nell'anno indicato per l'impresa, vuoi sovrascriverlo? (S/N) "), "booleano", "Valore inserito non valido")
                         if answer == True: 
