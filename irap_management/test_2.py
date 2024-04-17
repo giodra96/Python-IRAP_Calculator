@@ -1,6 +1,6 @@
 #Il test_2 contiene metodi che si occupano principalmente di eseguire analisi e calcoli sull'array lista_imprese
 
-import pandas as pd #Importo la libreria pandas per la gestione dei dati
+import pandas as pd #Import della libreria pandas per la gestione dei dati
 
 #Metodo che restituisce la media aritmetica su un parametro dell'array lista_imprese
 

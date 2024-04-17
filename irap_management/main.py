@@ -1,5 +1,5 @@
-import test_1, test_3 #Importo i test 2 e 3 per poterli utilizzare nel main
-from comune import Comune #Importo la classe Comune
+import test_1, test_3 #Import dei test 2 e 3 per poterli utilizzare nel main
+from comune import Comune #Import della classe Comune
 
 #Metodo per la creazione dei comuni presenti (come attributo sede di un oggetto Impresa) in una lista di imprese
 

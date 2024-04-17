@@ -1,18 +1,14 @@
-from flask import Blueprint, jsonify, request
-from models import db, Comune
+from flask import Blueprint, jsonify, request #Import framework flask
+from models import db, Comune #Import della classe Comune
 
-comuni_blueprint = Blueprint('comuni_blueprint', __name__, url_prefix='/api/comuni')
+comuni_blueprint = Blueprint('comuni_blueprint', __name__, url_prefix='/api/comuni') #Creazione di un blueprint per gestire le richiheste dei comuni
 
-# Gestione dei Comuni
+#Recupera tutti i comuni del db
 @comuni_blueprint.route('/', methods=['GET'])
 def get_all_comuni():
-    data = request.args
-    comuni = []
-    if ('nome' in data.keys()):
-        comuni = Comune.query.filter_by(nome=data.get('nome'))
-    else:
-        comuni = Comune.query.all()
-    return jsonify([c.serialize() for c in comuni])
+    comuni = [] #Lista per il salvaraggio dei dizionari dei comuni recuperati
+    comuni = Comune.query.all() #Recupero di tutti i comuni
+    return jsonify([c.serialize() for c in comuni]) #Restituzione dei comuni in formato json
 
 @comuni_blueprint.route('/<int:id>', methods=['GET'])
 def get_comune(id):

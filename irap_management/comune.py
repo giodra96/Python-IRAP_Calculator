@@ -1,4 +1,4 @@
-from modelloF24 import ModelloF24 #importo la classe ModelloF24
+from modelloF24 import ModelloF24 #import della classe ModelloF24
 
 #Definizione della classe Comune
 

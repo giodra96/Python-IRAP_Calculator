@@ -1,7 +1,7 @@
-from comune import Comune #Importo la classe Comune dal file comune.py
-from impresa import Impresa #Importo la classe Impresa dal file impresa.py
-from datetime import datetime, date #Importo datetime per la gestione e il controllo delle date
-import test_2 #Importo i metodi definiti nel test_2
+from comune import Comune #Import della classe Comune dal file comune.py
+from impresa import Impresa #Import della classe Impresa dal file impresa.py
+from datetime import datetime, date #Import di datetime per la gestione e il controllo delle date
+import test_2 #Import dei metodi definiti nel test_2
 
 #Metodo per la validazione dei dati inseriti da input
 

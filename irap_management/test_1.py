@@ -1,6 +1,6 @@
 #Il test_1 contiene metodi il cui scopo principale è la creazione e gestione di un array di oggetti Impresa
 
-from impresa import Impresa #Importo la classe Impresa dal file impresa.py
+from impresa import Impresa #Import della classe Impresa dal file impresa.py
 
 #Metodo che legge le imprese presenti su un file.txt passato come parametro
 #e per ogni impresa crea un oggetto Impresa aggiungendolo all'array lista_imprese
