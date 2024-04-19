@@ -50,7 +50,7 @@ def update_impresa(id):
             comune.imprese_registrate.append(impresa) #Registra l'impresa nel comune
         for key, value in data.items():
             if (key == "data_costituzione"):
-                value = datetime.strptime(value, "%Y-%m-%d") #Converte la data in un oggetto datetime
+                value = datetime.strptime(value, "%d-%m-%Y") #Converte la data in un oggetto datetime
             setattr(impresa, key, value) #Aggiorna i valori del dizionario
         db.session.commit() 
         return jsonify(impresa.serialize()) 

@@ -60,7 +60,7 @@ class Impresa(db.Model): #Creazione della tabella imppresa nel db
         self.numero_dipendenti = numero_dipendenti
         self.numero_soci = numero_soci
         self.numero_amministratori = numero_amministratori
-        self.data_costituzione = datetime.strptime(data_costituzione, "%Y-%m-%d") #Conversione della data in formato stringa in formato datetime
+        self.data_costituzione = datetime.strptime(data_costituzione, "%d-%m-%Y") #Conversione della data in formato stringa in formato datetime
         self.certificazioni_qualita = certificazioni_qualita
         self.fatturato = fatturato
 
@@ -75,7 +75,7 @@ class Impresa(db.Model): #Creazione della tabella imppresa nel db
             'numero_dipendenti': self.numero_dipendenti,
             'numero_soci': self.numero_soci,
             'numero_amministratori': self.numero_amministratori,
-            'data_costituzione': self.data_costituzione.strftime('%Y-%m-%d'), #Conversione della data in formato datetime in formato stringa
+            'data_costituzione': self.data_costituzione.strftime('%d-%m-%Y'), #Conversione della data in formato datetime in formato stringa
             'certificazioni_qualita': self.certificazioni_qualita,
             'fatturato': self.fatturato,
             'comune_id': self.comune_id
@@ -128,7 +128,7 @@ class ModelloF24(db.Model): #Creazione della tabella ModelloF24 nel db
     impresa = db.relationship('Impresa', backref='modelli_f24', lazy=True) 
     
     def __init__(self, impresa, data):
-        self.data = datetime.strptime(data, "%Y-%m-%d") #Conversione della data in formato stringa in formato datetime
+        self.data = datetime.strptime(data, "%d-%m-%Y") #Conversione della data in formato stringa in formato datetime
         self.impresa = impresa
         self.importo_irap = impresa.calcola_irap()
 
@@ -137,7 +137,7 @@ class ModelloF24(db.Model): #Creazione della tabella ModelloF24 nel db
             "id" : self.id ,
             "impresa_id" : self.impresa.id, 
             "comune_id" : self.comune_id,
-            "data": self.data.strftime('%Y-%m-%d'), #Conversione della data in formato datetime in formato stringa
+            "data": self.data.strftime('%d-%m-%Y'), #Conversione della data in formato datetime in formato stringa
             "importo_irap" : self.importo_irap
         }
 
@@ -148,7 +148,7 @@ class ModelloF24(db.Model): #Creazione della tabella ModelloF24 nel db
             "codice fiscale": self.impresa.codice_fiscale,
             "denominazione": self.impresa.denominazione,
             "ragione sociale": self.impresa.ragione_sociale,
-            "sede": self.impresa.sede_legale,
+            "sede": self.impresa.sede,
             "divisione ateco": self.impresa.divisione_ateco,
             "importo irap": self.importo_irap,
             "data": self.data

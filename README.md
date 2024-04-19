@@ -62,3 +62,4 @@ $ cd db_integration
 ```
 $ flask --app app run
 ```
+Continua sul **Readme** di db_integration per consultare casi d'uso con dati pronti all'uso.
