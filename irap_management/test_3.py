@@ -43,7 +43,7 @@ def aggiungi_comune(lista_comuni):
                     break
         comune = Comune(nome)
         lista_comuni.append(comune) #Aggiungo il nuovo comune alla lista
-        stop = input("Vuoi inserire altri comuni? (S/N): ") in ["n", "N"] #Se voglio aggiungere un altro comune setterò stop uguale a false
+        stop = input("Vuoi inserire altri comuni? (S/N): \n") in ["n", "N"] #Se voglio aggiungere un altro comune setterò stop uguale a false
     return lista_comuni
 
 #Metodo per la registrazione di un'impresa presso il comune
