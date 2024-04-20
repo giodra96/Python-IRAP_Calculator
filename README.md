@@ -37,14 +37,20 @@ $ python3 -m venv .venv
     ```
     $ .venv\Scripts\activate
     ```
+
+### **NB: Assicurarsi che il virtual environment sia stato attivato correttamente, altrimenti procedere alla selezione manuale**
+
 4. **Installazione delle dipendenze:**
 
 Utilizza **pip** per installare le dipendenze necessarie elencate nel file **requirements.txt**.
 ```
 $ pip3 install -r requirements.txt
 ```
+### **NB: Assicurarsi di essere all'interno della directory irap_management affinché il codice legga correttamente il file imprese.txt**
 
 ## Parte 2: db_integration
+
+La cartella **db_integration** contiene una versione lite del programma per l'integrazione dei dati con il database.
 
 Per comprendere appieno il funzionamento del programma e imparare come utilizzarlo, consulta il file **Readme** associato.
 
