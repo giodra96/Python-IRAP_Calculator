@@ -1,222 +1,133 @@
 # DB Flask
 
-## Step per l'utilizzo del db
+## Steps for using the database
 
-1. Installa e/o avvia postman per l'utilizzo delle API REST create in flask
+1. Install and/or start Postman to use the REST APIs created in Flask.
 
-2. Entra nel workspace e crea una nuova richihesta da file > new > http
+2. Enter the workspace and create a new request from File > New > HTTP.
 
-3. Scegli il metodo desiderato  (GET, POST, PUT, DELETE) e inserisci l'url della risorsa che vuoi utilizzare (**vedi casi d'uso sotto**)
+3. Choose the desired method (GET, POST, PUT, DELETE) and enter the URL of the resource you want to use (**see use cases below**).
 
-4. Inserisci i dati nel body se necessario (**alcuni esempi di body sono presenti nei casi d'uso sotto**)
+4. Enter the data in the body if necessary (**some examples of bodies are present in the use cases below**).
 
-5. Invia la richihesta e visualizza la risposta
+5. Send the request and view the response.
 
-## Casi d'uso
+## Use Cases
 
 **Disclaimer**
-I seguenti casi d'uso sono stati disposti nell'ordine esatto per il test di tutte le API REST create. 
-Se non eseguite in questo ordine potrebbe essere necessaria una loro diversa configurazione per il corretto funzionamento del programma.
-Vedi note aggiuntive su come configurare le API.
+The following use cases have been arranged in the exact order for testing all the created REST APIs.
+If not executed in this order, their different configuration may be necessary for the correct functioning of the program.
+See additional notes on how to configure the APIs.
 
-### Creazione di un nuovo comune
+### Creating a new comune
 
-Milano:
-- **Metodo**: POST
+Milan:
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/comuni
 - **Body**: {"nome": "Milano"}
 
 Cosenza:
-- **Metodo**: POST
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/comuni
 - **Body**: {"nome": "Cosenza"}
 
-Roma:
-- **Metodo**: POST
+Rome:
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/comuni
 - **Body**: {"nome": "Roma"}
 
-**Note**: i comuni vengono creati con un id crescente, tenere in considerazione l'id corretto per l'uso delle successive API dove richiesto.
+**Note**: i comuni are created with an incrementing id, take into account the correct id for the use of subsequent APIs where required.
 
-### Visualizzazione di tutti i comuni
+### Viewing all comuni
 
-- **Metodo**: GET
+- **Method**: GET
 - **URL**: http://127.0.0.1:5000/api/comuni
 
-### Modifica del comune Cosenza in Torino
+### Modifying the comune Cosenza to Torino
 
-- **Metodo**: PUT
+- **Method**: PUT
 - **URL**: http://127.0.0.1:5000/api/comuni/2
-- **Body**: {"nome": "Cosenza"}
+- **Body**: {"nome": "Torino"}
 
-**Note**: Cosenza è associata all'id 2, per la modifica di un comune generico è necessario modificare l'id del comune nell'url.
+**Note**: Cosenza is associated with id 2, for modifying a generic comune it is necessary to modify the comune id in the URL.
 
-### Visualizzazione del comune di Torino
+### Viewing the comune of Torino
 
-- **Metodo**: GET
+- **Method**: GET
 - **URL**: http://127.0.0.1:5000/api/comuni/2
 
-**Note**: Torino è associata all'id 2, per la visualizzazione di un comune generico è necessario modificare l'id del comune nell'url.
+**Note**: Torino is associated with id 2, for viewing a generic comune it is necessary to modify the comune id in the URL.
 
-### Eliminazione del comune di Roma
-- **Metodo**: DELETE
+### Deleting the comune of Rome
+- **Method**: DELETE
 - **URL**: http://127.0.0.1:5000/api/comuni/3
 
-**Note**: Roma è associata all'id 3, per l'eliminazione di un comune generico è necessario modificare l'id del comune nell'url.
+**Note**: Roma is associated with id 3, for deleting a generic comune it is necessary to modify the comune id in the URL.
 
-### Creazione di una nuova impresa
+### Creating a new impresa
 
 Nexi:
-- **Metodo**: POST
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/imprese
 - **Body**: {"codice_fiscale": "09489670969",
-            "denominazione": "Nexi",
-            "ragione_sociale": "Societa per Azioni",
-            "sede": "Milano",
-            "divisione_ateco": "K64",
-            "numero_dipendenti": 102,
-            "numero_soci": 8,
-            "numero_amministratori": 13,
-            "data_costituzione": "10-11-2017",
-            "certificazioni_qualita": true,
-            "fatturato": 3260000000,
-            "comune_id": 1}
+            "denominazione": "Nexi",
+            "ragione_sociale": "Societa per Azioni",
+            "sede": "Milano",
+            "divisione_ateco": "K64",
+            "numero_dipendenti": 102,
+            "numero_soci": 8,
+            "numero_amministratori": 13,
+            "data_costituzione": "10-11-2017",
+            "certificazioni_qualita": true,
+            "fatturato": 3260000000,
+            "comune_id": 1}
 
 Will:
-- **Metodo**: POST
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/imprese
 - **Body**: {"codice_fiscale": "04346220967",
-            "denominazione": "Will",
-            "ragione_sociale": "Società Responsabilita Limitata",
-            "sede": "Milano",
-            "divisione_ateco": "J58",
-            "numero_dipendenti": 10,
-            "numero_soci": 2,
-            "numero_amministratori": 1,
-            "data_costituzione": "17-06-2020",
-            "certificazioni_qualita": true,
-            "fatturato": 4600000,
-            "comune_id": 1}
+            "denominazione": "Will",
+            "ragione_sociale": "Società Responsabilita Limitata",
+            "sede": "Milano",
+            "divisione_ateco": "J58",
+            "numero_dipendenti": 10,
+            "numero_soci": 2,
+            "numero_amministratori": 1,
+            "data_costituzione": "17-06-2020",
+            "certificazioni_qualita": true,
+            "fatturato": 4600000,
+            "comune_id": 1}
 
 Directa:
-- **Metodo**: POST
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/imprese
 - **Body**: {"codice_fiscale": "06131300722",
-            "denominazione": "Directa",
-            "ragione_sociale": "Società Responsabilita Limitata",
-            "sede": "Torino",
-            "divisione_ateco": "K64",
-            "numero_dipendenti": 12,
-            "numero_soci": 3,
-            "numero_amministratori": 2,
-            "data_costituzione": "13-05-1962",
-            "certificazioni_qualita": true,
-            "fatturato": 22960000,
-            "comune_id": 2}
+            "denominazione": "Directa",
+            "ragione_sociale": "Società Responsabilita Limitata",
+            "sede": "Torino",
+            "divisione_ateco": "K64",
+            "numero_dipendenti": 12,
+            "numero_soci": 3,
+            "numero_amministratori": 2,
+            "data_costituzione": "13-05-1962",
+            "certificazioni_qualita": true,
+            "fatturato": 22960000,
+            "comune_id": 2}
 
 Young Platform:
-- **Metodo**: POST
+- **Method**: POST
 - **URL**: http://127.0.0.1:5000/api/imprese
 - **Body**: {"codice_fiscale": "11931440017",
-            "denominazione": "Young Platform",
-            "ragione_sociale": "Societa per Azioni",
-            "sede": "Torino",
-            "divisione_ateco": "K64",
-            "numero_dipendenti": 60,
-            "numero_soci": 6,
-            "numero_amministratori": 8,
-            "data_costituzione": "07-02-2015",
-            "certificazioni_qualita": true,
-            "fatturato": 1605000,
-            "comune_id": 2}
+            "denominazione": "Young Platform",
+            "ragione_sociale": "Societa per Azioni",
+            "sede": "Torino",
+            "divisione_ateco": "K64",
+            "numero_dipendenti": 60,
+            "numero_soci": 6,
+            "numero_amministratori": 8,
+            "data_costituzione": "07-02-2015",
+            "certificazioni_qualita": true,
+            "fatturato": 1605000,
+            "comune_id": 2}
 
-**Note**: le impprese vengono create con un id crescente, tenere in considerazione l'id corretto per l'uso delle successive API dove richiesto. L'id comune è associato al comune di riferimento, per la creazione di una nuova impresa è necessario modificare il comune nell'url.
-
-### Visualizzazione di tutte le imprese
-- **Metodo**: GET
-- **URL**: http://127.0.0.1:5000/api/imprese
-
-### Modifica delle certificazioni di qualità di Will in false
-
-- **Metodo**: PUT
-- **URL**: http://127.0.0.1:5000/api/imprese/2
-- **Body**: {"codice_fiscale": "04346220967",
-            "denominazione": "Will",
-            "ragione_sociale": "Società Responsabilita Limitata",
-            "sede": "Milano",
-            "divisione_ateco": "J58",
-            "numero_dipendenti": 10,
-            "numero_soci": 2,
-            "numero_amministratori": 1,
-            "data_costituzione": "17-06-2020",
-            "certificazioni_qualita": false,
-            "fatturato": 4600000,
-            "comune_id": 1}
-
-**Note**: per le modifiche indicare nell'url l'id corretto dell'impresa da modificare.
-
-### Visualizzazione dell'impresa con le modifiche effettuate
-- **Metodo**: GET
-- **URL**: http://127.0.0.1:5000/api/imprese/2
-
-**Note**: per visualizzare l'impresa indicare nell'url l'id corretto.
-
-### Eliminazione dell'impresa Young Platform
-- **Metodo**: DELETE
-- **URL**: http://127.0.0.1:5000/api/imprese/4
-
-**Note**: per eliminare l'impresa indicare nell'url l'id corretto.
-
-### Creazione ModelloF24
-
-Nexi su Milano:
-- **Metodo**: POST
-- **URL**: http://127.0.0.1:5000/api/modellif24
-- **Body**: {"impresa_id": 1,
-            "comune_id": 1,
-            "data": "02-03-2024"}
-
-Will su Milano:
-- **Metodo**: POST
-- **URL**: http://127.0.0.1:5000/api/modellif24
-- **Body**: {"impresa_id": 2,
-            "comune_id": 1,
-            "data": "10-02-2024"}
-
-Directa su Torino:
-- **Metodo**: POST
-- **URL**: http://127.0.0.1:5000/api/modellif24
-- **Body**: {"impresa_id": 3,
-            "comune_id": 2,
-            "data": "17-02-2024"}
-
-**Note**: per creare il modellof24 indicare l'id dell'impresa e del comune corretto.
-
-### Visualizzazione di tutti i ModelloF24
-- **Metodo**: GET
-- **URL**: http://127.0.0.1:5000/api/modellif24
-
-### Cambiamo la data del modello 
-- **Metodo**: PUT
-- **URL**: http://127.0.0.1:5000/api/modellif24/3
-- **Body**: {"data": "20-02-2024"}
-
-**Note**: per modificare il modellof24 indicare l'id del modello nell'url.
-
-### Visualizzazione delle modifiche effettuate sul modello
-- **Metodo**: GET
-- **URL**: http://127.0.0.1:5000/api/modellif24/3
-
-**Note**: per visualizzare il modellof24 indicare l'id del modello nell'url.
-
-### Eliminazione di un modello
-- **Metodo**: DELETE
-- **URL**: http://127.0.0.1:5000/api/modellif24/3
-
-**Note**: per eliminare il modellof24 indicare l'id del modello nell'url.
-
-### Stampa del modelloF24
-- **Metodo**: GET
-- **URL**: http://127.0.0.1:5000/api/modellif24/1/prepara
-
-**Note**: per preparare e stampare il modellof24 indicare l'id del modello nell'url.
+**Note**: le imprese are created with an incrementing id, take into account the correct id for the use of subsequent APIs where required. The comune id is associated with
