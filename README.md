@@ -1,71 +1,64 @@
-# Come utilizzare IRAP-Calculator
-## Parte 1: irap_management
+An academic project divided into two blocks: irap_management contains the code in its most extensive version, while db_integration is a lite version focused on integrating with a database (DBB) using Flask.
 
-La cartella **irap_management** contiene il programma principale per gestire il calcolo dell'IRAP per le imprese.
+# How to use IRAP-Calculator
 
-Per comprendere appieno il funzionamento del programma e imparare come utilizzarlo, consulta il file **Readme** associato.
+## Part 1: irap_management
 
-### Avvio del programma
+The **irap_management** folder contains the main program for managing the calculation of IRAP for businesses.
 
-Segui questi passaggi per avviare il programma:
+To fully understand how the program works and learn how to use it, please refer to the associated **Readme** file.
 
-1. **Naviga nella cartella del progetto:**
-```
+### Running the program
+
+Follow these steps to run the program:
+
+1. **Navigate to the project folder:**
 $ cd irap_management
-```
-2. **Crea un ambiente virtuale:**
 
-Utilizza il modulo **venv** per creare un ambiente virtuale isolato per il progetto.
-```
+2. **Create a virtual environment:**
+
+Use the **venv** module to create an isolated virtual environment for the project.
 $ python3 -m venv .venv
-```
-3. **Attiva il virtual enviroment:**
 
-    - Linux/MacOS:
-    ```
-    $ source .venv/bin/activate
-    ```
-    - Windows:
-    ```
-    $ .venv\Scripts\activate
-    ```
-    Se il comando non funziona, potrebbe essere necessario eseguire il seguente comando prima:
-    ```
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-    ```
-    Quindi, esegui di nuovo il comando per attivare l'ambiente virtuale:
-    ```
-    $ .venv\Scripts\activate
-    ```
+3. **Activate the virtual environment:**
 
-### **NB: Assicurarsi che il virtual environment sia stato attivato correttamente, altrimenti procedere alla selezione manuale**
+    - Linux/MacOS:
+    ```
+    $ source .venv/bin/activate
+    ```
+    - Windows:
+    ```
+    $ .venv\Scripts\activate
+    ```
+    If the command doesn't work, you may need to run the following command first:
+    ```
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    ```
+    Then, run the command again to activate the virtual environment:
+    ```
+    $ .venv\Scripts\activate
+    ```
 
-4. **Installazione delle dipendenze:**
+### **NB: Make sure the virtual environment has been activated correctly, otherwise proceed with manual selection**
 
-Utilizza **pip** per installare le dipendenze necessarie elencate nel file **requirements.txt**.
-```
+4. **Install dependencies:**
+
+Use **pip** to install the necessary dependencies listed in the **requirements.txt** file.
 $ pip3 install -r requirements.txt
-```
-### **NB: Assicurarsi di essere all'interno della directory irap_management affinché il codice legga correttamente il file imprese.txt**
 
-## Parte 2: db_integration
+### **NB: Make sure you are inside the irap_management directory so that the code correctly reads the imprese.txt file**
 
-La cartella **db_integration** contiene una versione lite del programma per l'integrazione dei dati con il database.
+## Part 2: db_integration
 
-Per comprendere appieno il funzionamento del programma e imparare come utilizzarlo, consulta il file **Readme** associato.
+The **db_integration** folder contains a lite version of the program for data integration with the database.
 
-### Avvio del programma
+To fully understand how the program works and learn how to use it, please refer to the associated **Readme** file.
 
-Segui questi passaggi per avviare il programma:
+### Running the program
 
-1. **Naviga nella cartella del progetto:**
-```
+Follow these steps to run the program:
+
+1. **Navigate to the project folder:**
 $ cd db_integration
-```
-2. **Crea il virtual environment e installa le dipendenze come spiegato sopra**
 
-3. **Avvia flask**
-```
-$ flask --app app run
-```
-Continua sul **Readme** di db_integration per consultare casi d'uso con dati pronti all'uso.
+2. **Create the virtual environment and install the dependencies as explained above**
